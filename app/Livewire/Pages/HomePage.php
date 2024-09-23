@@ -9,7 +9,7 @@ class HomePage extends Component
 {
     public function render()
     {   
-        $post = Posts::all();
+        $post = Posts::latest()->take(6)->get();
         return view('livewire.pages.home-page',compact('post'));
     }
 }

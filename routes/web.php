@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Pages\Blog;
 use App\Livewire\Pages\DetailPost;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\MakeBlog;
@@ -16,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', HomePage::class)->name('homepage');
+Route::get('/blog', Blog::class)->name('blog');
 
 // Group route yang memerlukan autentikasi
 Route::middleware('auth')->group(function () {
+    
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -27,13 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/make/blog', MakeBlog::class)->name('blog.create');
     // Route::get('/edit/blog/{slug}', PostEdit::class)->name('blog.edit');
-
-    Route::get('/edit/blog/{id}',
-        PostEdit::class
-    )->middleware(['post.owner'])->name('blog.edit');
-
+    Route::get('/make-blog', MakeBlog::class)->name('blog.create');
+    Route::get('/edit/blog/{id}',PostEdit::class)->middleware(['post.owner'])->name('blog.edit');
     Route::delete('/edit/blog/{id}', [DetailPost::class, 'destroy'])->name('blog.delete');
 
 });
