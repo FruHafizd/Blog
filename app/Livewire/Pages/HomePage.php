@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Posts;
 use Livewire\Component;
 
 class HomePage extends Component
 {
     public function render()
-    {
-        return view('livewire.pages.home-page');
+    {   
+        $post = Posts::all();
+        return view('livewire.pages.home-page',compact('post'));
     }
 }

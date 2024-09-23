@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'post.owner' => \App\Http\Middleware\CheckPostOwner::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
