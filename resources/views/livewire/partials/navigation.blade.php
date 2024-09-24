@@ -121,7 +121,7 @@
                           <ul class="">
                               @foreach($posts as $result) <!-- Loop through search results -->
                                   <li class="p-4 mb-3 bg-white hover:bg-gray-50 rounded-lg border border-gray-200 shadow-sm hover:shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1">
-                                      <a href="/{{ $result->slug }}" class="block"> 
+                                      <a href="{{ route('blog.detail', $result->slug) }}" class="block"> 
                                           <div class="flex items-center space-x-3">
                                               <!-- Title and content preview -->
                                               <div class="flex-1">

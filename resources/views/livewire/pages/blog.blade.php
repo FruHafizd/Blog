@@ -5,7 +5,7 @@
         <!-- Grid dengan postingan -->
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($post as $posts)
-            <a class="p-4 transition border border-gray-200 shadow-md group hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded-xl" href="/{{ $posts->slug }}">
+            <a class="p-4 transition border border-gray-200 shadow-md group hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded-xl" href="{{ route('blog.detail', $posts->slug) }}">
                 <div class="w-full h-40 overflow-hidden sm:h-52 lg:h-64 rounded-xl">
                     {{-- <img class="object-cover w-full h-full rounded-xl" src="{{ asset('storage/' . $posts->image) }}" alt="Event Image"> --}}
                     <img class="object-cover w-full h-full rounded-xl" src="{{ $posts->image }}" alt="Event Image">

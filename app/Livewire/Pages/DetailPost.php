@@ -14,12 +14,15 @@ class DetailPost extends Component
 
     public function mount($slug)
     {
-        $post = $this->post = Posts::where('slug', $slug)->first();
-        // dd($dd);
-        $this->slug = $slug;
-        if (!$post) {
-            abort(code: 404);
+        $this->slug = $slug; // Set slug
+        $this->post = Posts::where('slug', $slug)->first(); // Ambil postingan
+
+        if (!$this->post) {
+            abort(404); // Jika tidak ada postingan, tampilkan halaman 404
         }
+
+        // Increment hitungan pembacaan
+        $this->post->increment('view_count');
     }
 
     public function destroy(Request $request, $id)
@@ -41,8 +44,6 @@ class DetailPost extends Component
         session()->flash('success', 'Blog Deleted Successfully');
         return redirect()->route('homepage'); 
     }
-    
-
 
     public function render()
     {   
