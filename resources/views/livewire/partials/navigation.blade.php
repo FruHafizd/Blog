@@ -105,34 +105,45 @@
 
             <x-modal name="search" focusable>
               <div class="p-6 bg-white rounded-lg shadow-lg">
-                <div class="w-full">
-                  <div class="relative">
-                      <input
-                        wire:model.live="search"
-                        class="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-lg border border-slate-300 rounded-lg pl-4 pr-32 py-2 transition duration-300 ease focus:outline-none focus:border-slate-500 hover:border-slate-400 shadow-md focus:shadow-lg"
-                        placeholder="Search Blog Titles..."
-                      />
+                  <div class="w-full">
+                      <div class="relative">
+                          <input
+                              wire:model.live="search"
+                              class="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-lg border border-slate-300 rounded-lg pl-4 pr-32 py-2 transition duration-300 ease focus:outline-none focus:border-slate-500 hover:border-slate-400 shadow-md focus:shadow-lg"
+                              placeholder="Search Blog Titles..."
+                          />
+                      </div>
                   </div>
-                </div>
-            
-                <!-- Display Search Results -->
-                <div class="mt-4">
-                  @if($posts->count() > 0) <!-- Check if there are search results -->
-                    <ul class="max-h-60 overflow-y-auto border border-slate-300 rounded-lg bg-white shadow-md">
-                      @foreach($posts as $result) <!-- Loop through search results -->
-                      <a href="/{{ $result->slug }}"> 
-                        <li class="p-3 hover:bg-slate-100 cursor-pointer transition duration-200">
-                            {{ $result->title }} <!-- Display the title or any other attribute -->
-                        </li>
-                      </a>
-                      @endforeach
-                    </ul>
-                  @else
-                    <p class="text-gray-500 text-center">No results found.</p> <!-- Message when no results -->
-                  @endif
-                </div>
+          
+                  <!-- Display Search Results -->
+                  <div class="mt-4">
+                      @if($posts->count() > 0) <!-- Check if there are search results -->
+                          <ul class="">
+                              @foreach($posts as $result) <!-- Loop through search results -->
+                                  <li class="p-4 mb-3 bg-white hover:bg-gray-50 rounded-lg border border-gray-200 shadow-sm hover:shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1">
+                                      <a href="/{{ $result->slug }}" class="block"> 
+                                          <div class="flex items-center space-x-3">
+                                              <!-- Title and content preview -->
+                                              <div class="flex-1">
+                                                  <div class="text-blue-600 text-lg font-semibold">
+                                                      {{ $result->title }}
+                                                  </div>
+                                                  <div class="text-gray-600 mt-1 text-sm">
+                                                      {{ Str::limit($result->content, 80) }}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </li>
+                              @endforeach
+                          </ul>
+                      @else
+                          <p class="text-gray-500 text-center">No results found.</p> <!-- Message when no results -->
+                      @endif
+                  </div>
               </div>
-            </x-modal>
+          </x-modal>
+          
             
             
             
