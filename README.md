@@ -12,6 +12,6 @@ Selamat datang di repositori blog ini! Proyek ini adalah platform blog yang seda
 Saat ini, proyek ini masih dalam proses pengembangan. Kami terus berusaha menambahkan fitur dan memperbaiki bug. Silakan periksa cabang `development` untuk melihat kemajuan terkini.
 
 ## Kontribusi
-Kami sangat terbuka untuk kontribusi! Jika Anda ingin berkontribusi, silakan fork repositori ini dan buat pull request.
+Kami sangat terbuka untuk kontribusi! Jika Anda ingin berkontribusi, silakan fork repositori ini dan buat pull requests.
 
 Terima kasih telah mengunjungi repositori ini! Kami berharap dapat segera meluncurkan blog yang bermanfaat bagi semua.
