@@ -103,39 +103,28 @@
               </button>
             </div>
 
-            <x-modal name="search"  focusable>
+            <x-modal name="search" focusable>
               <div class="p-6 bg-white rounded-lg shadow-lg">
                 <div class="w-full">
                   <div class="relative">
-                    <input
-                      wire:model="searchTerm"
-                      class="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-lg border border-slate-300 rounded-lg pl-4 pr-32 py-2 transition duration-300 ease focus:outline-none focus:border-slate-500 hover:border-slate-400 shadow-md focus:shadow-lg"
-                      placeholder="Search Blog Titles..."
-                    />
-                    <button
-                      wire:click="performSearch"
-                      class="absolute top-1 right-1 flex items-center rounded-lg bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-600 disabled:pointer-events-none disabled:opacity-50"
-                      type="button"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                        <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
-                      </svg>
-                      <span class="hidden md:inline">Search</span>
-                    </button> 
+                      <input
+                        wire:model.live="search"
+                        class="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-lg border border-slate-300 rounded-lg pl-4 pr-32 py-2 transition duration-300 ease focus:outline-none focus:border-slate-500 hover:border-slate-400 shadow-md focus:shadow-lg"
+                        placeholder="Search Blog Titles..."
+                      />
                   </div>
                 </div>
             
                 <!-- Display Search Results -->
                 <div class="mt-4">
-                  @if(!empty($searchResults)) <!-- Check if there are search results -->
+                  @if($posts->count() > 0) <!-- Check if there are search results -->
                     <ul class="max-h-60 overflow-y-auto border border-slate-300 rounded-lg bg-white shadow-md">
-                      @foreach($searchResults as $result) <!-- Loop through search results -->
+                      @foreach($posts as $result) <!-- Loop through search results -->
                       <a href="/{{ $result->slug }}"> 
                         <li class="p-3 hover:bg-slate-100 cursor-pointer transition duration-200">
-                         
                             {{ $result->title }} <!-- Display the title or any other attribute -->
-                          </li>
-                        </a>
+                        </li>
+                      </a>
                       @endforeach
                     </ul>
                   @else
@@ -144,6 +133,7 @@
                 </div>
               </div>
             </x-modal>
+            
             
             
 

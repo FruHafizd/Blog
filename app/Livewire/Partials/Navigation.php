@@ -7,18 +7,25 @@ use Livewire\Component;
 
 class Navigation extends Component
 {   
-    public $searchTerm = '';
-    public $searchResults = [];
+    public $search = '';
+    protected $queryString = ['search'=> ['except' => '']];
 
-    public function performSearch()
+    public $limitPerPage = 10;
+
+    public function postData()
     {
-        // Perform your search logic here
-        // For example, fetching results from the database:
-        $this->searchResults = Posts::where('title', 'like', '%' . $this->searchTerm . '%')->get();
+        $this->limitPerPage = $this->limitPerPage + 6;
     }
 
     public function render()
-    {
-        return view('livewire.partials.navigation');
+    {   
+        $posts = Posts::latest()->paginate($this->limitPerPage);
+
+        if ($this->search !== null) {
+            $posts = Posts::where('title','like', '%' . $this->search . '%')
+            ->latest()->paginate($this->limitPerPage);
+        }
+
+        return view('livewire.partials.navigation', ['posts' => $posts]);
     }
 }
