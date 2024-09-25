@@ -20,7 +20,7 @@ class MakeBlog extends Component
     protected $rules = [
         'title' => 'required|string|max:255|unique:posts,title',
         'content' => 'required|string',
-        'image' => 'required|image|max:4093',
+        'image' => 'required|max:4093|mimes:avif,jpg,png,jpeg,gif',
     ];
 
     public function submit()
@@ -28,20 +28,21 @@ class MakeBlog extends Component
         $this->validate();
 
         try {
-            Posts::create([ // Gunakan model Post
+            
+            $slug = Str::slug(trim($this->title));
+            Posts::create([ 
                 'user_id' => auth()->user()->id, // Ambil ID pengguna yang sedang login
                 'title' => $this->title,
                 'content' => $this->content,
-                'slug' => Str::slug(trim($this->title)), // Buat slug dari judul
+                'slug' => $slug, // Buat slug dari judul
                 'published_at' => now(),
                 'image' =>  $this->image->store('images', 'public'),
             ]);
-    
+
             // Reset input
             $this->reset(['title', 'content']); // Lebih bersih menggunakan reset
-
             session()->flash('success', 'Blog post created successfully!');
-            return redirect()->route('homepage');
+            return redirect()->to("/{$slug}");
         } catch (\Exception $ex) {
             session()->flash('error', 'Something went wrong: ' . $ex->getMessage()); // Tampilkan pesan kesalahan yang lebih informatif
         }

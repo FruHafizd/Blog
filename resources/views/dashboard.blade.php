@@ -56,16 +56,17 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $post->title }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ Str::limit($post->content, 30) }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
+                                          <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">View</button> |
+                                          <button type="button" x-data @click.prevent="$dispatch('open-modal', 'confirm-blog-update-{{$post->id}}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-500 dark:hover:text-gray-400 dark:focus:text-gray-400">Update</button> |
+                                          <button type="button" x-data @click.prevent="$dispatch('open-modal', 'confirm-blog-deletion-{{$post->id}}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-none focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
+
+                                          
+                                              
+
                                         </td>
                                     </tr>
                                   @endforeach
 
-
-
-                                    
-                      
-                                    
                                   </tbody>
                                 </table>
                               </div>
@@ -92,4 +93,59 @@
             </div>
         </div>
     </div>
+
+    @foreach (\App\Models\Posts::all() as $post)
+
+        {{-- Modal delete blog --}}
+        <x-modal name="confirm-blog-deletion-{{$post->id}}" :show="$errors->blogDeletion->isNotEmpty()" focusable>
+          <form method="post" action="{{ route('blog.delete', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">
+              @csrf
+              @method('DELETE')
+      
+              <h2 class="text-lg font-medium text-gray-900 dark:text-gray-900">
+                  {{ __('Confirm Deletion') }}
+              </h2>
+      
+              <p class="mt-1 text-sm text-gray-700 dark:text-gray-600">
+                  {{ __('Are you sure you want to delete the blog titled:') }} <strong>{{ $post->title }}</strong>?
+                  {{ __('This action cannot be undone. Once deleted, all of its resources and data will be permanently removed.') }}
+              </p>
+      
+              <div class="mt-6">
+                  <x-input-label for="blog-title" value="{{ __('Blog Title') }}" class="sr-only" />
+      
+                  <input
+                      id="blog_title"
+                      name="blog_title"
+                      type="text"
+                      placeholder="Enter Blog Title"
+                      class="mt-1 block w-3/4 border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                      required
+                  />
+              </div>
+      
+              <div class="mt-6 flex justify-end">
+                  <x-secondary-button x-on:click="$dispatch('close')">
+                      {{ __('Cancel') }}
+                  </x-secondary-button>
+      
+                  <x-danger-button class="ms-3">
+                      {{ __('Delete This Blog') }}
+                  </x-danger-button>
+              </div>
+          </form>
+      </x-modal>
+
+      {{-- Modal update blog --}}
+      <x-modal name="confirm-blog-update-{{$post->id}}" :show="$errors->blogUpdate->isNotEmpty()" focusable>
+          <form method="post" action="{{ route('blog.edit', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">
+
+          </form>
+      </x-modal>
+
+      
+
+
+    @endforeach
+
 </x-app-layout>

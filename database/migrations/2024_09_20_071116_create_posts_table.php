@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('published_at');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('image');
+            $table->unsignedInteger('view_count')->default(0);
             $table->timestamps();
         });
     }

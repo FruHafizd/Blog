@@ -29,7 +29,7 @@
                             Delete This Blog
                         </button>
                     </div>
-                @endif
+                    @endif
                 
                 <x-modal name="confirm-blog-deletion" :show="$errors->blogDeletion->isNotEmpty()" focusable>
                     <form method="post" action="{{ route('blog.delete', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">

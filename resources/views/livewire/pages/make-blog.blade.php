@@ -70,10 +70,8 @@
                             <div class="text-red-500 text-sm">{{ $message }}</div>
                     @enderror
                     @if ($image)
-                    <div class="grid grid-cols-4 gap-4">
-                        @foreach ($image as $images)
-                            <img src="{{ $images->temporaryUrl() }}" class="w-full h-auto rounded-lg shadow-lg" alt="Preview Image">
-                        @endforeach
+                    <div class="grid grid-cols-4 gap-4 mt-4">
+                            <img src="{{ $image->temporaryUrl() }}" class="w-full h-auto rounded-lg shadow-lg" alt="Preview Image">
                     </div>
                     @endif
                 </div>

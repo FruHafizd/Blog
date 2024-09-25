@@ -6,7 +6,7 @@
         @vite('resources/css/app.css')
         <script src="./node_modules/preline/dist/preline.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
-
+        <script src="//unpkg.com/alpinejs" defer></script>
 
         <title>{{ $title ?? 'Blog' }}</title>
         @livewireStyles

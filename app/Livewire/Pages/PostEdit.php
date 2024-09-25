@@ -39,13 +39,13 @@ class PostEdit extends Component
      */
     public function update()
     {   
-         /**
+        /**
          * List of add/edit form rules
          */
         $this->validate([
             'title' => 'required|string|max:255|unique:posts,title,' . $this->postId,
             'content' => 'required|string',
-            'image' => 'required|image|max:4093',
+            'image' => 'required|max:4093|mimes:avif,jpg,png,jpeg,gif',
         ]);
     
         // Buat slug baru dari judul baru
