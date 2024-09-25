@@ -136,16 +136,15 @@
           </form>
       </x-modal>
 
-      {{-- Modal update blog --}}
-      <x-modal name="confirm-blog-update-{{$post->id}}" :show="$errors->blogUpdate->isNotEmpty()" focusable>
-          <form method="post" action="{{ route('blog.edit', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">
 
-          </form>
-      </x-modal>
-
-      
+      {{-- <x-modal name="confirm-blog-update-{{$post->id}}" :show="$errors->blogUpdate->isNotEmpty()" focusable>
+          @livewire('pages.post-edit',[$post->id])
+      </x-modal> --}}
 
 
     @endforeach
+    
+
+
 
 </x-app-layout>

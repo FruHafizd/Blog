@@ -112,4 +112,5 @@
 
         </div>
     </main>
+    @livewire('partials.comments', ['post' => $post])
 </div>

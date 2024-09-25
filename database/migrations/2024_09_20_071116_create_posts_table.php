@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('image');
             $table->unsignedInteger('view_count')->default(0);
+            $table->boolean('pin_blog')->default(false);
             $table->timestamps();
         });
     }
