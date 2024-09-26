@@ -6,6 +6,7 @@ use App\Livewire\Pages\DetailPost;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\MakeBlog;
 use App\Livewire\Pages\PostEdit;
+use App\Livewire\Partials\ViewUser;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -22,13 +23,16 @@ Route::get('/blog', Blog::class)->name('blog');
 // Group route yang memerlukan autentikasi
 Route::middleware('auth')->group(function () {
     
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard')->middleware('role:Admin');
+    Route::middleware('role:Admin')->group(function () {
 
-    Route::get('/user', function () {
-        return view('user');
-    })->name('user')->middleware('role:Admin');
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+
+        Route::get('/user', function () {
+            return view('user');
+        })->name('user');
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

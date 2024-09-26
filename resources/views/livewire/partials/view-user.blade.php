@@ -11,7 +11,7 @@
                             {{ __("Update your account's profile information and email address.") }}
                         </p>
                     </header>
-                    <form wire:submit="update" enctype="multipart/form-data" class="mt-6 space-y-6">
+                    <form wire:submit.prevent="update" enctype="multipart/form-data" class="mt-6 space-y-6">
                         @csrf
                         @method('patch')
                         <div>
@@ -70,7 +70,7 @@
                 </section>
 
                 <!-- Assign Role Section -->
-                <section wire:submit.prevent="assignRoles" class="mt-12 space-y-6">
+                <section class="mt-12 space-y-6">
                     <header>
                         <h2 class="text-lg font-semibold">{{ __('Assign Roles') }}</h2>
                         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -78,9 +78,9 @@
                         </p>
                     </header>
 
-                    <form class="mt-6 space-y-6">
+                    <form wire:submit.prevent="assignRoles" class="mt-6 space-y-6">
                         @csrf
-
+                    
                         <!-- Role Selection -->
                         <div>
                             <x-input-label :value="__('Roles')" />
@@ -94,14 +94,17 @@
                                     </label>
                                 </div>
                             @endforeach
-                            <x-input-error class="mt-2" :messages="$errors->get('selectedRoles')" />
+                            @error('selectedRoles')
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
                         </div>
-
+                    
                         <!-- Submit Button -->
                         <div class="flex justify-end mt-6">
                             <x-primary-button type="submit">{{ __('Save Roles') }}</x-primary-button>
                         </div>
                     </form>
+                    
                 </section>
 
                 <!-- Delete User Account Section -->
@@ -114,26 +117,24 @@
                     </header>
                     <x-danger-button x-data=""
                         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete User Account') }}</x-danger-button>
-                    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-                        <form method="post" class="p-6">
-                            @csrf
-                            @method('delete') <!-- Add the DELETE method -->
-                            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                {{ __('Are you sure you want to delete this user account?') }}
-                            </h2>
-                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                {{ __('This action is irreversible. Please confirm your decision to permanently delete this user account.') }}
-                            </p>
-                            <div class="flex justify-end mt-6">
-                                <x-primary-button x-on:click="$dispatch('close')">
-                                    {{ __('Cancel') }}
-                                </x-primary-button>
-                                <x-danger-button class="ms-3" wire:click="destroy({{ $user->id }})">
-                                    {{ __('Delete User Account') }}
-                                </x-danger-button>
+                        <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                            <div class="p-6">
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    {{ __('Are you sure you want to delete this user account?') }}
+                                </h2>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                    {{ __('This action is irreversible. Please confirm your decision to permanently delete this user account.') }}
+                                </p>
+                                <div class="flex justify-end mt-6">
+                                    <x-secondary-button x-on:click="$dispatch('close')">
+                                        {{ __('Cancel') }}
+                                    </x-secondary-button>
+                                    <x-danger-button class="ms-3" wire:click="destroy({{ $user->id }})">
+                                        {{ __('Delete User Account') }}
+                                    </x-danger-button>
+                                </div>
                             </div>
-                        </form>
-                    </x-modal>
+                        </x-modal>
                 </section>
                 <div class="flex justify-end mt-6">
                     <x-primary-button x-on:click="$dispatch('close')">
