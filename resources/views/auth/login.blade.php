@@ -2,7 +2,17 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <!-- Message display -->
+    @if (session('message'))
+        <div class="mb-4 p-4 bg-red-100 text-red-800 rounded">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
+
+     
+
         <div class="p-4 sm:p-7">
           <div class="text-center">
             <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
@@ -58,14 +68,20 @@
                 <!-- End Password Input -->
       
                 <!-- Checkbox -->
-                <div class="flex items-center">
+                {{-- <div class="flex items-center">
                   <div class="flex">
                     <input id="remember_me" name="remember_me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" name="remember">
                   </div>
                   <div class="ms-3">
                     <label for="remember_me" class="text-sm dark:text-white">Remember me</label>
                   </div>
-                </div>
+                </div> --}}
+                <label for="remember_me" class="inline-flex items-center">
+                  <input id="remember_me" type="checkbox"  name="remember" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  <div class="ms-3">
+                    <label for="remember_me" class="text-sm dark:text-white">Remember me</label>
+                  </div>
+                </label>
                 <!-- End Checkbox -->
       
                 <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Sign in</button>

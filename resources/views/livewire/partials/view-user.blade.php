@@ -49,23 +49,36 @@
                             {{ __('Manage user bans. You can set the duration for how long a user will be banned.') }}
                         </p>
                     </header>
-                    <form method="post" class="mt-6 space-y-6">
-                        @csrf
+                    <form wire:submit.prevent="banUser" class="mt-6 space-y-6">
+                        <!-- Ban Until (Date) -->
                         <div>
-                            <x-input-label for="user_id" :value="__('User ID')" />
-                            <x-text-input id="user_id" name="user_id" type="text" class="block w-full mt-1"
-                                required />
-                            <x-input-error class="mt-2" :messages="$errors->get('user_id')" />
+                            <x-input-label for="banned_until" :value="__('Ban Until (Date)')" class="text-gray-900 dark:text-gray-100" />
+                            <input id="banned_until" name="banned_until" type="date"
+                            class="block w-full mt-1 border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                            wire:model="banned_until" required />
+                        
+                            @error('banned_until')
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
                         </div>
+                    
+                        <!-- Ban Reason -->
                         <div>
-                            <x-input-label for="ban_duration" :value="__('Ban Duration (days)')" />
-                            <x-text-input id="ban_duration" name="ban_duration" type="number"
-                                class="block w-full mt-1" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('ban_duration')" />
+                            <x-input-label for="banned_reason" :value="__('Reason for Ban')" class="text-gray-900 dark:text-gray-100" />
+                            <textarea id="banned_reason" name="banned_reason" rows="3"
+                                      class="block w-full mt-1 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                                      wire:model="banned_reason" required></textarea>
+                            @error('banned_reason')
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
                         </div>
+                    
+                        <!-- Submit Button -->
                         <div class="flex justify-end mt-6">
-                            <x-primary-button>{{ __('Ban User') }}</x-primary-button>
+                            <x-primary-button type="submit" wire:click="banUser">{{ __('Ban User') }}</x-primary-button>
+                            <x-primary-button type="button" class="ml-2" wire:click="unbanUser">{{ __('Unban User') }}</x-primary-button>
                         </div>
+                        
                     </form>
                 </section>
 

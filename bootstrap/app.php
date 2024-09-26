@@ -14,8 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'post.owner' => \App\Http\Middleware\CheckPostOwner::class,
             'role' => \App\Http\Middleware\CheckAdminRole::class,
+            'banned' => \App\Http\Middleware\CheckBanned::class,
         ]);
     })
+    
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

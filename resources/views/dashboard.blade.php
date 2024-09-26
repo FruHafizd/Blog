@@ -139,11 +139,6 @@
       @livewire('partials.update-post-admin', ['post' => $post->id])
 
 
-
-
-    
-
-
     @endforeach
     
 

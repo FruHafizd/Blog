@@ -11,6 +11,8 @@ class ViewUser extends Component
     public $roles;
     public $name;
     public $email;
+    public $banned_until;
+    public $banned_reason;
     public $selectedRoles = [];
     
     protected function rules()
@@ -18,6 +20,8 @@ class ViewUser extends Component
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'banned_until' => 'required|date|after:today',
+            'banned_reason' => 'required|string|max:255',
         ];
     }
 
@@ -31,7 +35,18 @@ class ViewUser extends Component
         $this->selectedRoles = $this->user->roles->pluck('name')->toArray();
         $this->name = $user->name;
         $this->email = $user->email;
+    
+        // Memastikan banned_until terformat dengan benar
+        if ($user->banned_until) {
+            $this->banned_until = \Carbon\Carbon::parse($user->banned_until)->toDateString(); // Konversi menjadi objek Carbon
+        } else {
+            $this->banned_until = null; // Jika tidak ada, set menjadi null
+        }
+        
+        $this->banned_reason = $user->banned_reason;
     }
+    
+    
 
     public function assignRoles()
     {
@@ -58,6 +73,46 @@ class ViewUser extends Component
         } catch (\Exception $ex) {
             session()->flash('error', 'Something goes wrong!!');
         }
+    }
+
+    public function banUser()
+    {
+        $this->validate();
+
+        try {
+            // Update the user’s banned status in the database
+            \App\Models\User::whereId($this->user->id)->update([
+                'banned_until' => $this->banned_until,
+                'banned_reason' => $this->banned_reason,
+            ]);
+
+            // Flash a success message
+            session()->flash('success', 'User banned successfully until ' . $this->banned_until . '.');
+        } catch (\Exception $e) {
+            // Flash an error message in case of an exception
+            session()->flash('error', 'Failed to ban user: ' . $e->getMessage());
+        }
+
+        return redirect()->route('user'); // Redirect to the relevant page
+    }
+
+    public function unbanUser()
+    {
+        try {
+            // Update status banned user menjadi null
+            \App\Models\User::whereId($this->user->id)->update([
+                'banned_until' => null,
+                'banned_reason' => null, // Opsional: reset alasan banned
+            ]);
+
+            // Flash pesan sukses
+            session()->flash('success', 'User unbanned successfully.');
+        } catch (\Exception $e) {
+            // Flash pesan error jika terjadi kesalahan
+            session()->flash('error', 'Failed to unban user: ' . $e->getMessage());
+        }
+
+        return redirect()->route('user'); // Redirect ke halaman yang relevan
     }
 
     /**
