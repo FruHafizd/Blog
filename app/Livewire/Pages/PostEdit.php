@@ -43,7 +43,6 @@ class PostEdit extends Component
             'title' => 'required|string|max:255|unique:posts,title,' . $this->postId,
             'content' => 'required|string',
             'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
-            'pin_blog' => 'boolean',
         ]);
 
         $newSlug = Str::slug(trim($this->title));
@@ -68,6 +67,8 @@ class PostEdit extends Component
     
     public function render()
     {
-        return view('livewire.pages.post-edit');
+        $post = Posts::find($this->postId); // Ambil objek post berdasarkan ID
+        return view('livewire.pages.post-edit', compact('post'));
     }
+
 }

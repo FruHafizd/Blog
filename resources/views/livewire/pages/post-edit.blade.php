@@ -55,28 +55,28 @@
                     @enderror
                 </div>
                 <!-- End Floating Textarea -->
-
                 <div>
-                    <label for="file-input" class="sr-only">Choose file</label>
-                    <input type="file" name="file-input" id="file-input" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
-                    file:bg-gray-50 file:border-0
-                    file:me-4
-                    file:py-3 file:px-4"
-                    wire:model="image" 
-                    required>
-                    @error('image')
-                            <div class="text-red-500 text-sm">{{ $message }}</div>
-                    @enderror
-                    @if ($image)
-                    {{-- <div class="grid grid-cols-4 gap-4">
-                        @foreach ($image as $images)
-                            <img src="{{ $images->temporaryUrl() }}" class="w-full h-auto rounded-lg shadow-lg" alt="Preview Image">
-                        @endforeach
-                    </div> --}}
-                    @endif
-                </div>
-               
-
+                    <div>
+                        <label for="image" class="block text-sm font-semibold text-gray-700">Image</label>
+                        <input type="file" name="file-input" id="file-input"
+                            class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500
+                                    file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
+                            wire:model="image">
+                        @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        
+                        <!-- Tampilkan gambar yang sudah ada -->
+                        @if ($post->image)
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="mt-4 w-full h-auto rounded-lg">
+                        @endif
+                
+                        <!-- Tampilkan prabaca gambar yang diupload -->
+                        @if ($image)
+                            <div class="grid grid-cols-4 gap-4 mt-4">
+                                <img src="{{ $image->temporaryUrl() }}" class="w-full h-auto rounded-lg shadow-lg" alt="Preview Image">
+                            </div>
+                        @endif
+                    </div>
+                </div>                
                 <div class="flex items-center gap-x-2">
                     <button type="button" class="text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-500 dark:hover:text-neutral-200 dark:focus:text-neutral-200" data-hs-file-upload-remove="">
                       <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

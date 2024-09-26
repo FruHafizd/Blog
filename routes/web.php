@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/make-blog', MakeBlog::class)->name('blog.create');
     Route::get('/edit/blog/{id}',PostEdit::class)->middleware(['post.owner'])->name('blog.edit');
     Route::delete('/edit/blog/{id}', [DetailPost::class, 'destroy'])->name('blog.delete');
-
+    
 });
 
 // Route autentikasi

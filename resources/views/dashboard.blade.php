@@ -136,10 +136,12 @@
           </form>
       </x-modal>
 
+      @livewire('partials.update-post-admin', ['post' => $post->id])
 
-      {{-- <x-modal name="confirm-blog-update-{{$post->id}}" :show="$errors->blogUpdate->isNotEmpty()" focusable>
-          @livewire('pages.post-edit',[$post->id])
-      </x-modal> --}}
+
+
+
+    
 
 
     @endforeach

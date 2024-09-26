@@ -6,22 +6,25 @@
 
         <!-- Grid -->
         <div class="grid lg:grid-cols-2 gap-6">
+        
+        @foreach ($pinBlog as $blog)
+            <!-- Card -->
+            <a class="group relative block rounded-xl focus:outline-none" href="/{{ $blog->slug }}">
+                <div class="shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-gray-900/70">
+                <img class="size-full absolute top-0 start-0 object-cover" src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">
+                </div>
 
-        <!-- Card -->
-        <a class="group relative block rounded-xl focus:outline-none" href="#">
-            <div class="shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-gray-900/70">
-            <img class="size-full absolute top-0 start-0 object-cover" src="https://images.unsplash.com/photo-1669828230990-9b8583a877ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Blog Image">
-            </div>
-
-            <div class="absolute bottom-0 inset-x-0 z-10">
-            <div class="flex flex-col h-full p-4 sm:p-6">
-                <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/80 group-focus:text-white/80">
-                Facebook is creating a news section in Watch to feature breaking news
-                </h3>
-            </div>
-            </div>
-        </a>
+                <div class="absolute bottom-0 inset-x-0 z-10">
+                <div class="flex flex-col h-full p-4 sm:p-6">
+                    <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/80 group-focus:text-white/80">
+                   {{$blog->title}}
+                    </h3>
+                </div>
+                </div>
+            </a>
         <!-- End Card -->
+        @endforeach
+
         </div>
         <!-- End Grid -->
     </div>

@@ -11,7 +11,7 @@ class HomePage extends Component
     {   
         $post = Posts::latest()->take(6)->get();
         $mostReadPosts = Posts::orderBy('view_count', 'desc')->take(6)->get();
-        $pinBlog = Posts::orderBy('view_count', 'desc')->take(6)->get();
-        return view('livewire.pages.home-page',compact('post','mostReadPosts'));
+        $pinBlog = Posts::query()->where('pin_blog',1)->take(2)->get();
+        return view('livewire.pages.home-page',compact('post','mostReadPosts','pinBlog'));
     }
 }
