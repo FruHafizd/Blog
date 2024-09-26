@@ -24,13 +24,16 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('role:Admin');
+
+    Route::get('/user', function () {
+        return view('user');
+    })->name('user')->middleware('role:Admin');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::get('/edit/blog/{slug}', PostEdit::class)->name('blog.edit');
     Route::get('/make-blog', MakeBlog::class)->name('blog.create');
     Route::get('/edit/blog/{id}',PostEdit::class)->middleware(['post.owner'])->name('blog.edit');
     Route::delete('/edit/blog/{id}', [DetailPost::class, 'destroy'])->name('blog.delete');
