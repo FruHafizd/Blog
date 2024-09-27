@@ -10,12 +10,36 @@ use Livewire\WithPagination;
 class Dashboard extends Component
 {   
     use WithPagination;
+
+    public $search = '';
+    protected $queryString = ['search'=> ['except' => '']];
+
+    public $limitPerPage = 10;
     
-    public function render()
-    {   
-        // DB::enableQueryLog(); 
-        $posts = Posts::with('user')->paginate(10);
-        // dd(DB::getQueryLog());
-        return view('livewire.table.dashboard',compact('posts'));
+    public function postData()
+    {
+        $this->limitPerPage = $this->limitPerPage + 6;
     }
+
+    public function render()
+    {
+        $query = Posts::with('user');
+
+        // Jika ada pencarian, filter berdasarkan title, name, dan content
+        if ($this->search !== null && $this->search !== '') {
+            $query->where(function($q) {
+                $q->where('title', 'like', '%' . $this->search . '%')
+                ->orWhereHas('user', function($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%');
+                })
+                ->orWhere('content', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        // Menggunakan pagination
+        $posts = $query->latest()->paginate($this->limitPerPage);
+
+        return view('livewire.table.dashboard', compact('posts'));
+    }
+
 }
