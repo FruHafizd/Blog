@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // Posts::factory()->count(20)->create();
-        $this->call(RoleAndPermissionSeeder::class);
+        Posts::factory()->count(100)->create();
+        // $this->call(RoleAndPermissionSeeder::class);
         // User::factory()->create([
         //     'name' => 'Admin',
         //     'email' => 'admin@admin.com',

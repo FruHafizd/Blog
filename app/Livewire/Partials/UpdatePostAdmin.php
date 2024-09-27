@@ -3,7 +3,7 @@
 namespace App\Livewire\Partials;
 
 use App\Models\Posts;
-use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -48,7 +48,7 @@ class UpdatePostAdmin extends Component
         $this->post->update([
             'title' => $this->title,
             'content' => $this->content,
-            'slug' => $this->slug,
+            'slug' => Str::slug(trim($this->title)),
             'pin_blog' => $this->pin_blog,
         ]);
 

@@ -14,16 +14,6 @@ class ViewUser extends Component
     public $banned_until;
     public $banned_reason;
     public $selectedRoles = [];
-    
-    protected function rules()
-    {
-        return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'banned_until' => 'required|date|after:today',
-            'banned_reason' => 'required|string|max:255',
-        ];
-    }
 
     public function mount(User $user)
     {
@@ -46,15 +36,25 @@ class ViewUser extends Component
         $this->banned_reason = $user->banned_reason;
     }
     
-    
-
     public function assignRoles()
     {
-        // Sinkronisasi roles yang dipilih dengan user
-        $this->user->syncRoles($this->selectedRoles);
-        session()->flash('message', 'Roles updated successfully.');
-        return redirect()->route('user');
+        // Validasi untuk memastikan setidaknya satu role dipilih
+        $this->validate([
+            'selectedRoles' => 'required|array|min:1',
+        ]);
+    
+        try {
+            // Mengsinkronisasi roles dengan user
+            $this->user->syncRoles($this->selectedRoles); // Ini akan menambah dan menghapus role secara otomatis
+            session()->flash('message', 'Roles updated successfully.');
+        } catch (\Exception $ex) {
+            // Menangani kesalahan
+            session()->flash('error', 'Failed to update roles: ' . $ex->getMessage());
+        }
+    
+        return redirect()->route('user'); // Redirect ke halaman user
     }
+    
 
     /**
      * update the User data
@@ -62,7 +62,10 @@ class ViewUser extends Component
      */
     public function update()
     {
-        $this->validate();
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
         try {
             \App\Models\User::whereId($this->user->id)->update([
                 'name' => $this->name,
@@ -77,7 +80,10 @@ class ViewUser extends Component
 
     public function banUser()
     {
-        $this->validate();
+        $this->validate([
+            'banned_until' => 'required|date|after:today',
+            'banned_reason' => 'required|string|max:255',
+        ]);
 
         try {
             // Update the user’s banned status in the database
@@ -133,6 +139,6 @@ class ViewUser extends Component
     
     public function render()
     {
-        return view('livewire.partials.view-user');
+        return view('livewire.partials.view-user',['user' => $this->user]);
     }
 }
