@@ -12,6 +12,7 @@ use App\Http\Middleware\CheckBanned; // Import the middleware
 Route::get('/', HomePage::class)->name('homepage');
 Route::get('/blog', Blog::class)->name('blog');
 
+
 // Group route yang memerlukan autentikasi
 Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned here
     

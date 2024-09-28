@@ -1,4 +1,4 @@
-<div  class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     
     <!-- Card Blog -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -7,23 +7,28 @@
         <!-- Grid -->
         <div class="grid lg:grid-cols-2 gap-6">
         
-        @foreach ($pinBlog as $blog)
+            @foreach ($pinBlog as $blog)
             <!-- Card -->
             <a class="group relative block rounded-xl focus:outline-none" href="/{{ $blog->slug }}">
                 <div class="shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-gray-900/70">
-                <img class="size-full absolute top-0 start-0 object-cover" src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">
+                    <img class="size-full absolute top-0 start-0 object-cover" src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">
                 </div>
-
+                
                 <div class="absolute bottom-0 inset-x-0 z-10">
-                <div class="flex flex-col h-full p-4 sm:p-6">
-                    <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/80 group-focus:text-white/80">
-                   {{$blog->title}}
-                    </h3>
-                </div>
+                    <div class="flex flex-col h-full p-4 sm:p-6">
+                        <div class="flex justify-end">
+                            
+                        </div>
+                        <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/80 group-focus:text-white/80">
+                            {{$blog->title}}
+                        </h3>
+                        
+                    </div>
                 </div>
             </a>
-        <!-- End Card -->
-        @endforeach
+            <!-- End Card -->
+            @endforeach
+        
 
         </div>
         <!-- End Grid -->
@@ -40,7 +45,12 @@
             <a class="p-4 transition border border-gray-200 shadow-md group hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded-xl" href="/{{ $posts->slug }}">
                 <div class="w-full h-40 overflow-hidden sm:h-52 lg:h-64 rounded-xl">
                     <img class="object-cover w-full h-full rounded-xl" src="{{ asset('storage/' . $posts->image) }}" alt="Event Image">
-                    {{-- <img class="object-cover w-full h-full rounded-xl" src="{{ $posts->image }}" alt="Event Image"> --}}
+                </div>
+                <div class="flex justify-end items-center mt-4">
+                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
+                        <span class="size-1.5 inline-block rounded-full bg-blue-800 dark:bg-blue-500"></span>
+                        {{ $posts->categories->title }}
+                    </span>
                 </div>
                 <h3 class="mt-4 text-lg font-semibold text-gray-800">
                     <strong>{{ $posts->title }}</strong>
@@ -58,7 +68,7 @@
         
         <!-- Tombol "View All" di pojok kanan bawah -->
         <div class="relative mt-6">
-            <a  href="{{ route('blog') }}" class="absolute right-0 inline-flex items-center text-sm font-semibold text-gray-800 gap-x-1 hover:text-blue-600 transition ease-in-out duration-300">
+            <a href="{{ route('blog') }}" class="absolute right-0 inline-flex items-center text-sm font-semibold text-gray-800 gap-x-1 hover:text-blue-600 transition ease-in-out duration-300">
                 View All
                 <svg class="transition-transform ease-in-out duration-300 shrink-0 group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </a>
@@ -74,7 +84,12 @@
             <a class="p-4 transition border border-gray-200 shadow-md group hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded-xl" href="{{ route('blog.detail', $posts->slug) }}">
                 <div class="w-full h-40 overflow-hidden sm:h-52 lg:h-64 rounded-xl">
                     <img class="object-cover w-full h-full rounded-xl" src="{{ asset('storage/' . $posts->image) }}" alt="Event Image">
-                    {{-- <img class="object-cover w-full h-full rounded-xl" src="{{ $posts->image }}" alt="Event Image"> --}}
+                </div>
+                <div class="flex justify-end items-center mt-4">
+                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
+                        <span class="size-1.5 inline-block rounded-full bg-blue-800 dark:bg-blue-500"></span>
+                        {{ $posts->categories->title }}
+                    </span>
                 </div>
                 <h3 class="mt-4 text-lg font-semibold text-gray-800">
                     <strong>{{ $posts->title }}</strong>
@@ -92,22 +107,10 @@
         
         <!-- Tombol "View All" di pojok kanan bawah -->
         <div class="relative mt-6">
-            <a  href="{{ route('blog') }}" class="absolute right-0 inline-flex items-center text-sm font-semibold text-gray-800 gap-x-1 hover:text-blue-600 transition ease-in-out duration-300">
+            <a href="{{ route('blog') }}" class="absolute right-0 inline-flex items-center text-sm font-semibold text-gray-800 gap-x-1 hover:text-blue-600 transition ease-in-out duration-300">
                 View All
                 <svg class="transition-transform ease-in-out duration-300 shrink-0 group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </a>
         </div>
     </div>
-    
-  
-   
-
-
-
-
-
-
-
-
-
 </div>

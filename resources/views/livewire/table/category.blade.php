@@ -46,7 +46,9 @@
                                     </table>
                                 </div>
                                 <div class="py-1 px-4">
-                                    {{ $categories->links() }}
+                                    <nav class="flex items-center space-x-1" aria-label="Pagination">
+                                        {{ $categories->links('livewire.partials.posts-pagination') }}  
+                                    </nav>
                                 </div>
                             </div>
                         </div>

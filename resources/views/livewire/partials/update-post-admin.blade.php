@@ -78,7 +78,7 @@
                         @error('category_id') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     
-
+    
                     <!-- Pin Blog -->
                     <div class="flex items-center">
                         <input wire:model="pin_blog" type="checkbox" id="pin_blog"

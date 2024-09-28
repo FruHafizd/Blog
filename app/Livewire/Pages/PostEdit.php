@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Categories;
 use App\Models\Posts;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,8 @@ class PostEdit extends Component
     public $image;
     public $postId;
     public $slug;
-
+    public $category_id;
+    public $categories;
     
     public function mount($id)
     {   
@@ -30,6 +32,9 @@ class PostEdit extends Component
         $this->content = $post->content;
         $this->image = null;
         $this->slug = $post->slug;
+
+        $this->categories = Categories::all();
+        $this->category_id = $post->categories_id;
         
     }
     
@@ -43,6 +48,7 @@ class PostEdit extends Component
             'title' => 'required|string|max:255|unique:posts,title,' . $this->postId,
             'content' => 'required|string',
             'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
+            'category_id' => 'required|exists:categories,id', 
         ]);
 
         $newSlug = Str::slug(trim($this->title));
@@ -52,7 +58,7 @@ class PostEdit extends Component
         $post->content = $this->content;
         $post->slug = $newSlug;
         $post->published_at = now();
-
+        $post->categories_id = $this->category_id;
         // Hanya simpan gambar baru jika diupload
         if ($this->image) {
             $post->image = $this->image->store('images', 'public');
@@ -68,6 +74,7 @@ class PostEdit extends Component
     public function render()
     {
         $post = Posts::find($this->postId); // Ambil objek post berdasarkan ID
+        
         return view('livewire.pages.post-edit', compact('post'));
     }
 
