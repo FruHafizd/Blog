@@ -23,7 +23,7 @@ class Dashboard extends Component
 
     public function render()
     {
-        $query = Posts::with('user');
+        $query = Posts::with(['user','categories']);
 
         // Jika ada pencarian, filter berdasarkan title, name, dan content
         if ($this->search !== null && $this->search !== '') {
@@ -31,6 +31,9 @@ class Dashboard extends Component
                 $q->where('title', 'like', '%' . $this->search . '%')
                 ->orWhereHas('user', function($query) {
                     $query->where('name', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('categories', function($query) {
+                    $query->where('title', 'like', '%' . $this->search . '%');
                 })
                 ->orWhere('content', 'like', '%' . $this->search . '%');
             });

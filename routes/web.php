@@ -24,6 +24,11 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
         Route::get('/user', function () {
             return view('user');
         })->name('user');
+
+        Route::get('/category', function () {
+            return view('category');
+        })->name('category');
+        
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

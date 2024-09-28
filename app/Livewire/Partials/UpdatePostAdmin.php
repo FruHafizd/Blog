@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Partials;
 
+use App\Models\Categories;
 use App\Models\Posts;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -18,6 +19,8 @@ class UpdatePostAdmin extends Component
     public $published_at;
     public $image;
     public $pin_blog;
+    public $category_id;
+    public $categories;
 
 
     public function mount(Posts $post)
@@ -27,6 +30,9 @@ class UpdatePostAdmin extends Component
         $this->content = $post->content;
         $this->slug = $post->slug;
         $this->pin_blog = (bool) $post->pin_blog;
+
+        $this->categories = Categories::all();
+        $this->category_id = $post->categories_id;
     }
 
     public function updateBlog()
@@ -36,6 +42,7 @@ class UpdatePostAdmin extends Component
         'content' => 'required',
         'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'pin_blog' => 'boolean',
+        'category_id' => 'required|exists:categories,id', 
         ]);
 
         // Handle image upload
@@ -50,11 +57,13 @@ class UpdatePostAdmin extends Component
             'content' => $this->content,
             'slug' => Str::slug(trim($this->title)),
             'pin_blog' => $this->pin_blog,
+            'categories_id' => $this->category_id, 
         ]);
 
         session()->flash('message', 'Blog updated successfully!');
         return redirect()->route('dashboard'); 
     }
+    
     public function render()
     {
         return view('livewire.partials.update-post-admin');

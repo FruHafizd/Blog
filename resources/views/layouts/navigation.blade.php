@@ -27,6 +27,15 @@
                     </x-nav-link>
                 </div>
                 @endif
+
+                @if(auth()->user()->hasRole('Admin'))
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('category')" :active="request()->routeIs('category')">
+                        {{ __('Category') }}
+                    </x-nav-link>
+                </div>
+                @endif
             
             </div>
 

@@ -59,6 +59,18 @@
                 <!-- End Floating Textarea -->
 
                 <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+                    <select id="category" wire:model="category_id" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id') <span class="error">{{ $message }}</span> @enderror
+                </div>
+                
+
+                <div>
                     <label for="file-input" class="sr-only">Choose file</label>
                     <input type="file" name="file-input" id="file-input" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                     file:bg-gray-50 file:border-0
