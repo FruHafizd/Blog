@@ -17,9 +17,16 @@ class CategoriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word, // Menggunakan nama acak untuk kategori
-            'created_at' => now(),
-            'updated_at' => now(),
+            'title' => $this->faker->randomElement([
+                'Teknologi',
+                'Kesehatan',
+                'Travel',
+                'Gaya Hidup',
+                'Bisnis dan Keuangan',
+                'Kuliner',
+                'Pendidikan',
+                'Hiburan'
+            ]),
         ];
     }
 }
