@@ -25,6 +25,7 @@
                                                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">No</th>
                                                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Name</th>
                                                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Email</th>
+                                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Suspend</th>
                                                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Roles</th>
                                                 <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Action</th>
                                             </tr>
@@ -35,6 +36,13 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $loop->iteration }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $user->name ?? 'Unknown' }}</td> <!-- Gunakan $user di sini -->
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $user->email }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                    <span class="{{ $user->banned_until ? 'bg-red-100 text-red-800 dark:bg-red-200 dark:text-red-900' : 'bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900' }} text-xs font-medium px-2.5 py-0.5 rounded">
+                                                        {{ $user->banned_until ? 'Banned' : 'Active' }}
+                                                    </span>
+                                                </td>
+                                                
+                                                
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                                                     @foreach ($user->roles as $role)
                                                         <span class="inline-flex items-center bg-primary-100 text-primary-800 text-xs font-medium px-2 py-1 rounded-full shadow-md mr-2">
