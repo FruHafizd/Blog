@@ -18,7 +18,7 @@ class Dashboard extends Component
     
     public function postData()
     {
-        $this->limitPerPage = $this->limitPerPage + 6;
+        $this->limitPerPage = $this->limitPerPage;
     }
 
     public function render()

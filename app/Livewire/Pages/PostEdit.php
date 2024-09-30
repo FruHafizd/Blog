@@ -45,13 +45,14 @@ class PostEdit extends Component
     public function update()
     {
         $this->validate([
-            'title' => 'required|string|max:255|unique:posts,title,' . $this->postId,
+            'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
             'category_id' => 'required|exists:categories,id', 
+            'slug' => 'required|unique:posts,slug,' . $this->postId, 
         ]);
 
-        $newSlug = Str::slug(trim($this->title));
+        $newSlug = Str::slug(trim($this->slug));
 
         $post = Posts::find($this->postId);
         $post->title = $this->title;
@@ -69,6 +70,11 @@ class PostEdit extends Component
         session()->flash('success', 'Blog Updated Successfully');
 
         return redirect()->to("/{$newSlug}");
+    }
+
+    public function generateSlug()
+    {
+        $this->slug = Str::slug($this->slug);
     }
     
     public function render()

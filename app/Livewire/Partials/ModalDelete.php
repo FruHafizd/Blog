@@ -9,9 +9,9 @@ class ModalDelete extends Component
 {
     public $post;
 
-    public function mount($postId)
+    public function mount($idPost)
     {
-        $this->post = Posts::findOrFail($postId);
+        $this->post = Posts::findOrFail($idPost);
     }
 
     public function render()

@@ -1,51 +1,51 @@
 <?php
-namespace App\Livewire\Pages;
+
+namespace App\Livewire\Partials;
 
 use App\Models\Categories;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Str;
 use App\Models\Posts;
-use Livewire\WithFileUploads;
 
-class MakeBlog extends Component
-{   
+class ModalMakeBlog extends Component
+{
     use WithFileUploads;
+
     public $title;
     public $content;
     public $image;
-    public $category_id; // Properti untuk kategori
+    public $pin_blog;
     public $slug;
+    public $category_id; // Properti untuk kategori
 
     /**
      * List of add/edit form rules
      */
     protected $rules = [
-        'title' => 'required|string|max:255',
+        'title' => 'required|string|max:255|unique:posts,title',
         'content' => 'required|string',
         'image' => 'required|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'category_id' => 'required|exists:categories,id', // Validasi kategori
-        'slug' => 'required|unique:posts,slug', 
+        'slug' => 'required|max:255|unique:posts,slug',
     ];
 
     public function submit()
     {
         $this->validate();
-
         try {
-            $slug = Str::slug(trim($this->slug));
-
             Posts::create([ 
                 'user_id' => auth()->user()->id, // Ambil ID pengguna yang sedang login
                 'title' => $this->title,
                 'content' => $this->content,
-                'slug' => $slug, // Buat slug dari judul
+                'slug' => $this->slug, // Buat slug dari judul
                 'published_at' => now(),
                 'image' => $this->image->store('images', 'public'),
                 'categories_id' => $this->category_id, // Simpan kategori yang dipilih
+                'pin_blog'=> (bool) $this->pin_blog
             ]);
-
             session()->flash('success', 'Blog post created successfully!');
-            return redirect()->to("/{$slug}");
+            return redirect()->route("dashboard");
         } catch (\Exception $ex) {
             session()->flash('error', 'Something went wrong: ' . $ex->getMessage());
         }
@@ -58,9 +58,8 @@ class MakeBlog extends Component
 
     public function render()
     {
-        return view('livewire.pages.make-blog', [
-            'categories' => Categories::all(), // Mengirimkan daftar kategori ke view
+        return view('livewire.partials.modal-make-blog',[
+            'categories' => Categories::all(), 
         ]);
     }
 }
-

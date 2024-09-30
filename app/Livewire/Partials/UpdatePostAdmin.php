@@ -38,11 +38,12 @@ class UpdatePostAdmin extends Component
     public function updateBlog()
     {
         $this->validate([
-        'title' => 'required|string|max:255|unique:posts,title,' . $this->post->id,
+        'title' => 'required|string|max:255',
         'content' => 'required',
         'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'pin_blog' => 'boolean',
-        'category_id' => 'required|exists:categories,id', 
+        'category_id' => 'required|exists:categories,id',
+        'slug' => 'required|unique:posts,slug,' . $this->post->id, 
         ]);
 
         // Handle image upload
@@ -55,7 +56,7 @@ class UpdatePostAdmin extends Component
         $this->post->update([
             'title' => $this->title,
             'content' => $this->content,
-            'slug' => Str::slug(trim($this->title)),
+            'slug' => $this->slug,
             'pin_blog' => $this->pin_blog,
             'categories_id' => $this->category_id, 
         ]);
@@ -64,8 +65,13 @@ class UpdatePostAdmin extends Component
         return redirect()->route('dashboard'); 
     }
     
-    public function render()
+    public function generateSlug()
     {
+        $this->slug = Str::slug($this->slug);
+    }
+    
+    public function render()
+    {   
         return view('livewire.partials.update-post-admin');
     }
 }

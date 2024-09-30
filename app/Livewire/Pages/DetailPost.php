@@ -36,7 +36,7 @@ class DetailPost extends Component
     
         // Validasi judul yang dimasukkan
         $request->validate([
-            'blog_title' => 'required|string|in:' . $post->title,
+            'blog_slug' => 'required|string|in:' . $post->slug,
         ]);
     
         // Jika validasi berhasil, hapus post

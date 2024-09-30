@@ -41,18 +41,19 @@
                         </h2>
                 
                         <p class="mt-1 text-sm text-gray-700 dark:text-gray-600">
-                            {{ __('Are you sure you want to delete the blog titled:') }} <strong>{{ $post->title }}</strong>?
-                            {{ __('This action cannot be undone. Once deleted, all of its resources and data will be permanently removed.') }}
+                            {{ __('Are you sure you want to delete the blog with the slug:') }} 
+                            <strong class="font-medium">{{ $post->slug }}</strong>?
+                            {{ __('This action is irreversible. Once deleted, all related data will be permanently removed.') }}
                         </p>
                 
                         <div class="mt-6">
                             <x-input-label for="blog-title" value="{{ __('Blog Title') }}" class="sr-only" />
                 
                             <input
-                                id="blog_title"
-                                name="blog_title"
+                                id="blog_slug"
+                                name="blog_slug"
                                 type="text"
-                                placeholder="Enter Blog Title"
+                                placeholder="Enter Blog Slug to confirm"
                                 class="mt-1 block w-3/4 border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
                                 required
                             />
