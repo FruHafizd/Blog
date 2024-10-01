@@ -21,7 +21,5 @@
 
     @livewireScripts
 
-    <!-- Inisialisasi SimpleMDE jika diperlukan -->
-    @stack('scripts')
 </body>
 </html>

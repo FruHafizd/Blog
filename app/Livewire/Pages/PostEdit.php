@@ -18,6 +18,7 @@ class PostEdit extends Component
     public $slug;
     public $category_id;
     public $categories;
+    public $short_description;
     
     public function mount($id)
     {   
@@ -32,6 +33,7 @@ class PostEdit extends Component
         $this->content = $post->content;
         $this->image = null;
         $this->slug = $post->slug;
+        $this->short_description = $post->short_description;
 
         $this->categories = Categories::all();
         $this->category_id = $post->categories_id;
@@ -60,6 +62,7 @@ class PostEdit extends Component
         $post->slug = $newSlug;
         $post->published_at = now();
         $post->categories_id = $this->category_id;
+        $post->short_description = $this->short_description;
         // Hanya simpan gambar baru jika diupload
         if ($this->image) {
             $post->image = $this->image->store('images', 'public');

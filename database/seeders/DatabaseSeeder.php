@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categories;
 use App\Models\Posts;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,16 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
         // Posts::factory()->count(100)->create();
+        Categories::factory()->create();
 
-        // $this->call(RoleAndPermissionSeeder::class);
-        // User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => Hash::make('admin'),
-        // ]);
-        // $user = User::first();
-        // $user->assignRole('Admin');
+        $this->call(RoleAndPermissionSeeder::class);
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('admin'),
+        ]);
+        $user = User::first();
+        $user->assignRole('Admin');
     }
 }

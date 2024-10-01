@@ -31,6 +31,14 @@
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
 
+                        <div class="relative mt-6">
+                            <textarea id="short_description" rows="4" class="peer w-full border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:ring-0 focus:border-indigo-600 py-2 transition-colors duration-300" placeholder="Short Description" wire:model="short_description" required></textarea>
+                            <label for="short_description" class="absolute left-0 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-indigo-600">Short Description</label>
+                        </div>
+                        @error('short_description')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+
                         <!-- Category Select -->
                         <div class="relative mt-6">
                             <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>

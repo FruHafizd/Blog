@@ -23,7 +23,8 @@
                         @endif
 
                         <div class="prose dark:prose-invert max-w-none mb-6">
-                            {!! $post->content ?? 'No content available' !!}
+                            Short Description :
+                            {{ $post->short_description ?? 'No content available' }}
                         </div>
 
                         <div class="flex justify-start">

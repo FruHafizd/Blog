@@ -17,6 +17,7 @@ class ModalMakeBlog extends Component
     public $image;
     public $pin_blog;
     public $slug;
+    public $short_description;
     public $category_id; // Properti untuk kategori
 
     /**
@@ -25,6 +26,7 @@ class ModalMakeBlog extends Component
     protected $rules = [
         'title' => 'required|string|max:255|unique:posts,title',
         'content' => 'required|string',
+        'short_description' => 'required|string',
         'image' => 'required|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'category_id' => 'required|exists:categories,id', // Validasi kategori
         'slug' => 'required|max:255|unique:posts,slug',
@@ -38,6 +40,7 @@ class ModalMakeBlog extends Component
                 'user_id' => auth()->user()->id, // Ambil ID pengguna yang sedang login
                 'title' => $this->title,
                 'content' => $this->content,
+                'short_description' => $this->short_description,
                 'slug' => $this->slug, // Buat slug dari judul
                 'published_at' => now(),
                 'image' => $this->image->store('images', 'public'),

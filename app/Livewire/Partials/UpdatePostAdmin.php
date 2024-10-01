@@ -21,6 +21,7 @@ class UpdatePostAdmin extends Component
     public $pin_blog;
     public $category_id;
     public $categories;
+    public $short_description;
 
 
     public function mount(Posts $post)
@@ -28,6 +29,7 @@ class UpdatePostAdmin extends Component
         $this->post = $post;
         $this->title = $post->title;
         $this->content = $post->content;
+        $this->short_description = $post->short_description;
         $this->slug = $post->slug;
         $this->pin_blog = (bool) $post->pin_blog;
 
@@ -40,6 +42,7 @@ class UpdatePostAdmin extends Component
         $this->validate([
         'title' => 'required|string|max:255',
         'content' => 'required',
+        'short_description' => 'required',
         'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'pin_blog' => 'boolean',
         'category_id' => 'required|exists:categories,id',
@@ -56,6 +59,7 @@ class UpdatePostAdmin extends Component
         $this->post->update([
             'title' => $this->title,
             'content' => $this->content,
+            'short_description' => $this->short_description,
             'slug' => $this->slug,
             'pin_blog' => $this->pin_blog,
             'categories_id' => $this->category_id, 

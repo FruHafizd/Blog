@@ -31,6 +31,14 @@
                         @error('content') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                     </div>
 
+                    <!-- Content -->
+                    <div>
+                        <label for="short_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Short Description</label>
+                        <textarea wire:model="short_description" id="short_description" rows="5" required
+                                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                        @error('short_description') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                    </div>
+
                    <!-- Slug Input -->
                     <div>
                         <label for="slug" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Slug</label>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('image');
             $table->unsignedInteger('view_count')->default(0);
             $table->boolean('pin_blog')->default(false);
+            $table->text('short_description');
             $table->timestamps();
         });
     }

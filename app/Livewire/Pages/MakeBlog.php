@@ -15,13 +15,15 @@ class MakeBlog extends Component
     public $image;
     public $category_id; // Properti untuk kategori
     public $slug;
-
+    public $short_description;
+    
     /**
      * List of add/edit form rules
      */
     protected $rules = [
         'title' => 'required|string|max:255',
         'content' => 'required|string',
+        'short_description' => 'required|string',
         'image' => 'required|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'category_id' => 'required|exists:categories,id', // Validasi kategori
         'slug' => 'required|unique:posts,slug', 
@@ -42,6 +44,7 @@ class MakeBlog extends Component
                 'published_at' => now(),
                 'image' => $this->image->store('images', 'public'),
                 'categories_id' => $this->category_id, // Simpan kategori yang dipilih
+                'short_description' => $this->short_description, // Simpan kategori yang dipilih
             ]);
 
             session()->flash('success', 'Blog post created successfully!');

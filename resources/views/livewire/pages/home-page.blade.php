@@ -56,7 +56,7 @@
                     <strong>{{ $posts->title }}</strong>
                 </h3>
                 <p class="mt-2 text-gray-600">
-                    {{ Str::limit( $posts->content, 180) }}                 
+                    {{ Str::limit( $posts->short_description, 180) }}                 
                 </p>
                 <p class="inline-flex items-center mt-3 text-sm font-semibold text-gray-800 gap-x-1">
                     Learn more
@@ -95,7 +95,7 @@
                     <strong>{{ $posts->title }}</strong>
                 </h3>
                 <p class="mt-2 text-gray-600">
-                    {{ Str::limit( $posts->content, 180) }}                 
+                    {{ Str::limit( $posts->short_description, 180) }}                 
                 </p>
                 <p class="inline-flex items-center mt-3 text-sm font-semibold text-gray-800 gap-x-1">
                     Learn more
