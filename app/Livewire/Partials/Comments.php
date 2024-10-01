@@ -58,7 +58,8 @@ class Comments extends Component
             $comment->delete();
             $this->loadComments();
 
-            session()->flash('message', 'Comment deleted successfully!');
+            // session()->flash('message', 'Comment deleted successfully!');
+            notify()->info('Blog Updated Successfully');
         }
     }
 

@@ -47,10 +47,11 @@ class MakeBlog extends Component
                 'short_description' => $this->short_description, // Simpan kategori yang dipilih
             ]);
 
-            session()->flash('success', 'Blog post created successfully!');
+             // Mengatur session dengan tipe dan pesan
+            notify()->success('Blog created successfully!');
             return redirect()->to("/{$slug}");
         } catch (\Exception $ex) {
-            session()->flash('error', 'Something went wrong: ' . $ex->getMessage());
+            notify()->warning('message', 'Something went wrong: ' . $ex->getMessage());
         }
     }
 

@@ -7,19 +7,22 @@
     <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-
+    
     <title>{{ $title ?? 'Blog' }}</title>
     @livewireStyles
+    <link rel="stylesheet" href="{{ asset('vendor/mckenziearts/laravel-notify/css/notify.css') }}">
 </head>
 <body>
     @livewire('partials.navigation')
     <main>
         {{ $slot }} 
     </main>
-
+    
     @livewire('partials.footer')
-
+    
     @livewireScripts
-
+    
+    <x-notify::notify />
+    @notifyJs
 </body>
 </html>

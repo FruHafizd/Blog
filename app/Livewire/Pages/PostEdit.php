@@ -70,8 +70,8 @@ class PostEdit extends Component
 
         $post->save();
 
-        session()->flash('success', 'Blog Updated Successfully');
-
+        // session()->flash('success', 'Blog Updated Successfully');
+        notify()->success('Blog Updated Successfully');
         return redirect()->to("/{$newSlug}");
     }
 

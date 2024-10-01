@@ -34,10 +34,10 @@ class DetailPost extends Component
     {
         $post = Posts::findOrFail($id);
     
-        // Pastikan pengguna adalah pemilik post
-        if (Auth::id() !== $post->user_id) {
-            abort(403);
-        }
+        // // Pastikan pengguna adalah pemilik post
+        // if (Auth::id() !== $post->user_id) {
+        //     abort(403);
+        // }
     
         // Validasi judul yang dimasukkan
         $request->validate([
@@ -46,7 +46,8 @@ class DetailPost extends Component
     
         // Jika validasi berhasil, hapus post
         $post->delete();
-        session()->flash('success', 'Blog Deleted Successfully');
+       // Set flash message
+        notify()->info('Blog Deleted Successfully');
         return redirect()->route('homepage'); 
     }
 

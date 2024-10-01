@@ -29,10 +29,10 @@ class Category extends Component
                 'title' => $this->name_category,
             ]);
 
-            session()->flash('message', 'Category created successfully!');
+            notify()->success('message', 'Category created successfully!');
         } catch (\Exception $e) {
             Log::error('Failed to create category: ' . $e->getMessage());
-            session()->flash('error', 'Failed to create category. Please try again.');
+            notify()->success('error', 'Failed to create category. Please try again.');
         }
         return redirect()->route('category');
     }
@@ -44,10 +44,10 @@ class Category extends Component
             $category = Categories::findOrFail($id);
             $category->delete();
 
-            session()->flash('message', 'Category deleted successfully!');
+            notify()->info('message', 'Category deleted successfully!');
         } catch (\Exception $e) {
             Log::error('Failed to delete category: ' . $e->getMessage());
-            session()->flash('error', 'Failed to delete the category. Please try again.');
+            notify()->info('error', 'Failed to delete the category. Please try again.');
         }
         return redirect()->route('category');
     }

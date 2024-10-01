@@ -25,9 +25,10 @@ class ModalUpdateCategory extends Component
             $this->categories->update([
                 'title' => $this->title
             ]); 
-            session()->flash('message', 'Category updated successfully!');
+            // session()->flash('message', 'Category updated successfully!');
+            notify()->success('message', 'Category updated successfully!');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to update category. Please try again.');
+            notify()->success('error', 'Failed to update category. Please try again.');
         }
         return redirect()->route('category');
     }

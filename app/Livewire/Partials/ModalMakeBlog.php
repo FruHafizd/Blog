@@ -47,10 +47,11 @@ class ModalMakeBlog extends Component
                 'categories_id' => $this->category_id, // Simpan kategori yang dipilih
                 'pin_blog'=> (bool) $this->pin_blog
             ]);
-            session()->flash('success', 'Blog post created successfully!');
+            // session()->flash('success', 'Blog post created successfully!');
+            notify()->success('Blog post created successfully!');
             return redirect()->route("dashboard");
         } catch (\Exception $ex) {
-            session()->flash('error', 'Something went wrong: ' . $ex->getMessage());
+            notify()->success('error', 'Something went wrong: ' . $ex->getMessage());
         }
     }
 

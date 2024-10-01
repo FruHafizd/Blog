@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ asset('vendor/mckenziearts/laravel-notify/css/notify.css') }}">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -31,6 +32,9 @@
             <main>
                 {{ $slot }}
             </main>
+
+            <x-notify::notify />
+            @notifyJs
         </div>
     </body>
 </html>

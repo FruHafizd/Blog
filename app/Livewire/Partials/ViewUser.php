@@ -46,10 +46,11 @@ class ViewUser extends Component
         try {
             // Mengsinkronisasi roles dengan user
             $this->user->syncRoles($this->selectedRoles); // Ini akan menambah dan menghapus role secara otomatis
-            session()->flash('message', 'Roles updated successfully.');
+            // session()->flash('message', 'Roles updated successfully.');
+            notify()->success('message', 'Roles updated successfully.');
         } catch (\Exception $ex) {
             // Menangani kesalahan
-            session()->flash('error', 'Failed to update roles: ' . $ex->getMessage());
+            notify()->success('error', 'Failed to update roles: ' . $ex->getMessage());
         }
     
         return redirect()->route('user'); // Redirect ke halaman user
@@ -71,10 +72,11 @@ class ViewUser extends Component
                 'name' => $this->name,
                 'email' => $this->email,
             ]);
-            session()->flash('profile-updated', 'Profile User Update Successfully');
+            // session()->flash('profile-updated', 'Profile User Update Successfully');
+            notify()->success('profile-updated', 'Profile User Update Successfully');
             return redirect()->route('user');
         } catch (\Exception $ex) {
-            session()->flash('error', 'Something goes wrong!!');
+            notify()->success('error', 'Something goes wrong!!');
         }
     }
 
@@ -93,10 +95,10 @@ class ViewUser extends Component
             ]);
 
             // Flash a success message
-            session()->flash('success', 'User banned successfully until ' . $this->banned_until . '.');
+            notify()->success('success', 'User banned successfully until ' . $this->banned_until . '.');
         } catch (\Exception $e) {
             // Flash an error message in case of an exception
-            session()->flash('error', 'Failed to ban user: ' . $e->getMessage());
+            notify()->success('error', 'Failed to ban user: ' . $e->getMessage());
         }
 
         return redirect()->route('user'); // Redirect to the relevant page
@@ -112,10 +114,10 @@ class ViewUser extends Component
             ]);
 
             // Flash pesan sukses
-            session()->flash('success', 'User unbanned successfully.');
+            notify()->info('success', 'User unbanned successfully.');
         } catch (\Exception $e) {
             // Flash pesan error jika terjadi kesalahan
-            session()->flash('error', 'Failed to unban user: ' . $e->getMessage());
+            notify()->success('error', 'Failed to unban user: ' . $e->getMessage());
         }
 
         return redirect()->route('user'); // Redirect ke halaman yang relevan
@@ -130,9 +132,9 @@ class ViewUser extends Component
             $user = \App\Models\User::findOrFail($id);
             $user->delete();
     
-            session()->flash('success', 'User deleted successfully.');
+            notify()->warning('success', 'User deleted successfully.');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to delete the user.');
+            notify()->warning('error', 'Failed to delete the user.');
         }
         return redirect()->route('user');
     }

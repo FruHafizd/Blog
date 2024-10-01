@@ -65,7 +65,8 @@ class UpdatePostAdmin extends Component
             'categories_id' => $this->category_id, 
         ]);
 
-        session()->flash('message', 'Blog updated successfully!');
+        // session()->flash('message', 'Blog updated successfully!');
+        notify()->success('message', 'Blog updated successfully!');
         return redirect()->route('dashboard'); 
     }
     
