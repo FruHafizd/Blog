@@ -6,6 +6,7 @@ use App\Models\Posts;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Parsedown;
 
 class DetailPost extends Component
 {   
@@ -14,14 +15,18 @@ class DetailPost extends Component
 
     public function mount($slug)
     {
-        $this->slug = $slug; // Set slug
-        $this->post = Posts::where('slug', $slug)->first(); // Ambil postingan
+        $this->slug = $slug;
+        $this->post = Posts::where('slug', $slug)->first();
 
         if (!$this->post) {
-            abort(404); // Jika tidak ada postingan, tampilkan halaman 404
+            abort(404);
         }
 
-        // Increment hitungan pembacaan
+        // Parse konten markdown menjadi HTML
+        $parsedown = new Parsedown();
+        $this->post->content = $parsedown->text($this->post->content);
+
+        // Increment view count
         $this->post->increment('view_count');
     }
 

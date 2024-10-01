@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.markdown-content ol {
+    list-style-type: decimal; /* Pastikan tipe list tetap decimal (angka) */
+    margin-left: 1.5rem; /* Berikan jarak margin jika diperlukan */
+    margin-bottom: 1rem; /* Tambahkan margin bawah */
+}
+
+.markdown-content ol li {
+    margin-bottom: 0.5rem; /* Opsional, berikan jarak antar item */
+}
+
+.markdown-content ul {
+    list-style-type: disc; /* Menentukan tipe list sebagai bulleted */
+    margin-left: 1.5rem; /* Memberikan jarak margin */
+}
+
+.markdown-content ul li {
+    margin-bottom: 0.5rem; /* Jarak antar item */
+}
+
+.markdown-content p {
+    margin-bottom: 1rem; /* Tambahkan jarak bawah untuk paragraf */
+}
+
+.markdown-content ol, 
+.markdown-content ul {
+    margin-top: 1rem; /* Tambahkan jarak atas untuk list */
+}
+
+.markdown-content h1, 
+.markdown-content h2, 
+.markdown-content h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

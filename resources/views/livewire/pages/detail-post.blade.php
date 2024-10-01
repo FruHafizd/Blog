@@ -90,30 +90,11 @@
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">
 
-            <div class="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4 mx-auto">
-                <p class="pb-6">Advantage old had otherwise sincerity dependent additions. It in adapted natural hastily is justice. Six draw you him full not mean evil...</p>
-
-                <p class="pb-6">Difficulty on insensible reasonable in. From as went he they. Preference themselves me as thoroughly partiality considered on in estimating...</p>
-
-                <p class="pb-6">Adieus except say barton put feebly favour him. Entreaties unpleasant sufficient few pianoforte discovered uncommonly ask...</p>
-
-                <div class="border-l-4 border-gray-500 pl-4 mb-6 italic rounded-lg">
-                    Sportsman do offending supported extremity breakfast by listening. Decisively advantages nor expression unpleasing she led met...
-                </div>
-
-                <p class="pb-6">Exquisite cordially mr happiness of neglected distrusts. Boisterous impossible unaffected he me everything...</p>
-
-                <h2 class="text-2xl text-gray-800 font-bold mb-4 mt-4">Uneasy barton seeing remark happen his has</h2>
-
-                <p class="pb-6">Guest it he tears aware as. Make my no cold of need. He been past in by my hard. Warmly thrown oh he common future...</p>
-
-                <p class="pb-6">Dashwood contempt on mr unlocked resolved provided of of. Stanhill wondered it it welcomed oh. Hundred no prudent he however smiling...</p>
-
-                <p class="pb-6">Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of...</p>
-
-                <p class="pb-6">Detract yet delight written farther his general. If in so bred at dare rose lose good. Feel and make two real miss use easy...</p>
-
+            <div class="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4 mx-auto markdown-content">
+                {!! $post->content !!}
             </div>
+            
+            
 
         </div>
     </main>
