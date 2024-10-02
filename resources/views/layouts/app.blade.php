@@ -14,6 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{ asset('vendor/mckenziearts/laravel-notify/css/notify.css') }}">
+        <script src="//unpkg.com/alpinejs" defer></script>
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -35,6 +37,7 @@
 
             <x-notify::notify />
             @notifyJs
+            @livewireScripts
         </div>
     </body>
 </html>

@@ -38,6 +38,7 @@ class ViewUser extends Component
     
     public function assignRoles()
     {
+        \Log::info('assignRoles called with selected roles: ', $this->selectedRoles);
         // Validasi untuk memastikan setidaknya satu role dipilih
         $this->validate([
             'selectedRoles' => 'required|array|min:1',

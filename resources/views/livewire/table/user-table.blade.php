@@ -57,7 +57,11 @@
                                                     <button type="button" x-data @click.prevent="$dispatch('open-modal', 'user-action-{{$user->id}}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-500 dark:hover:text-gray-400 dark:focus:text-gray-400">View</button>
                                                 </td>
                                             </tr>
-                                                @livewire('partials.view-user', ['user' => $user->id], key($user->id))
+                                                
+                                            @endforeach
+
+                                            @foreach($users as $user)
+                                                @livewire('partials.view-user', ['user' => $user], key($user->id))
                                             @endforeach
                                         </tbody>
                                     </table>

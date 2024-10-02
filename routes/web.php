@@ -9,6 +9,7 @@ use App\Livewire\Pages\MakeBlog;
 use App\Livewire\Pages\PostEdit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckBanned; // Import the middleware
+use App\Livewire\Partials\ModalDelete;
 
 Route::get('/', HomePage::class)->name('homepage');
 Route::get('/blog', Blog::class)->name('blog');
@@ -41,6 +42,7 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
     Route::get('/make-blog', MakeBlog::class)->name('blog.create');
     Route::get('/edit/blog/{id}', PostEdit::class)->middleware(['post.owner'])->name('blog.edit');
     Route::delete('/edit/blog/{id}', [DetailPost::class, 'destroy'])->name('blog.delete');
+
 });
 
 // Route autentikasi
