@@ -62,7 +62,7 @@ class Comments extends Component
     {
         $comment = Comment::find($commentId);
 
-        if ($comment && $comment->user_id === auth()->id()) {
+        if ($comment && ($comment->user_id === auth()->id() || auth()->user()->hasRole('Admin') )) {
             $comment->delete();
             $this->loadComments();
 

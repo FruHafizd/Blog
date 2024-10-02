@@ -31,7 +31,7 @@
                         <button wire:click="$set('replyingTo', {{ $comment->id }})" class="text-blue-500 hover:text-blue-700">
                             Reply
                         </button>
-                        @if(auth()->id() == $comment->user_id)
+                        @if(auth()->id() == $comment->user_id || auth()->user()->hasRole('Admin'))
                             <button wire:click="deleteComment({{ $comment->id }})"
                                     onclick="return confirm('Are you sure you want to delete this comment?')"
                                     class="text-red-500 hover:text-red-700"

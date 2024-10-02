@@ -23,7 +23,7 @@ class CheckPostOwner
         $post = Posts::findOrFail($postId);
 
         // Periksa apakah pengguna adalah pemiliknya
-        if (Auth::id() !== $post->user_id) {
+        if (Auth::id() !== $post->user_id  && !Auth::user()->hasRole('Admin')) {
             abort(403, 'Unauthorized action');
         }
 

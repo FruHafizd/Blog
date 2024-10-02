@@ -11,6 +11,8 @@
                     {{-- 
                     Auth::check(): Memeriksa apakah pengguna sudah login.
 
+                    Auth::user()->hasRole('Admin'), memeriksa apakah pengguna yang sedang login memiliki peran Admin.
+
                     Auth::user()->id: Mendapatkan ID pengguna yang sedang login.
 
                     $post->user_id: ID pengguna yang memiliki postingan.
@@ -18,18 +20,18 @@
                     Jika kedua ID sama, maka link untuk mengedit blog akan ditampilkan.
                     --}}
                     
-                    @if (Auth::check() && Auth::user()->id === $post->user_id)
+                    @if (Auth::check() && (Auth::user()->hasRole('Admin') || Auth::user()->id === $post->user_id))
                     <div class="flex items-center space-x-2">
                         <a href="{{ route('blog.edit', $post->id) }}" class="text-sm text-blue-600 hover:underline">
                             Update Blog
                         </a>
                 
                         <!-- Tombol untuk membuka modal -->
-                        <button type="button"  x-on:click.prevent="$dispatch('open-modal', 'confirm-blog-deletion')" class="text-sm text-red-600 hover:underline">
+                        <button type="button" x-on:click.prevent="$dispatch('open-modal', 'confirm-blog-deletion')" class="text-sm text-red-600 hover:underline">
                             Delete This Blog
                         </button>
                     </div>
-                    @endif
+                @endif                
                 
                 <x-modal name="confirm-blog-deletion" :show="$errors->blogDeletion->isNotEmpty()" focusable>
                     <form method="post" action="{{ route('blog.delete', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">

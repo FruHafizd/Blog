@@ -24,7 +24,7 @@ class PostEdit extends Component
     {   
         $post = Posts::where('id', $id)->first();
         // Memastikan post ditemukan dan pengguna adalah pemiliknya
-        if (!$post || Auth::id() !== $post->user_id) {
+        if (!$post || Auth::id() !== $post->user_id && !Auth::user()->hasRole('Admin')) {
             abort(code: 403);
         }
 

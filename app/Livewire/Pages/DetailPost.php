@@ -34,10 +34,10 @@ class DetailPost extends Component
     {
         $post = Posts::findOrFail($id);
     
-        // // Pastikan pengguna adalah pemilik post
-        // if (Auth::id() !== $post->user_id) {
-        //     abort(403);
-        // }
+        // Pastikan pengguna adalah pemilik post
+        if (Auth::id() !== $post->user_id  && !Auth::user()->hasRole('Admin')) {
+            abort(403);
+        }
     
         // Validasi judul yang dimasukkan
         $request->validate([
