@@ -16,6 +16,12 @@ return new class extends Migration
             $table->text('body');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
+            /**
+             * Ini membuat relasi self-referential di mana parent_id merujuk ke id di tabel yang sama (comments).
+             * self-referential adalah cara untuk membuat hubungan di mana satu item bisa merujuk kepada item lain yang sama, seperti komentar yang memiliki balasan. Ini membantu kita mengorganisasi data dengan cara yang terstruktur dan mudah dimengerti.
+             */
             $table->timestamps();
         });
     }

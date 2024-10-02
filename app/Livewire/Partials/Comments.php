@@ -10,6 +10,12 @@ class Comments extends Component
     public $newComment;
     public $comments;
     public $post;
+    public $replyingTo = null;
+    public $replyComment = '';
+    /**
+     * $replyingTo: Menyimpan ID komentar yang sedang dibalas (jika ada).
+     * $replyComment: Menyimpan teks komentar balasan.
+     */
 
     protected $rules = [
         'newComment' => 'required|min:2'
@@ -26,6 +32,8 @@ class Comments extends Component
         // Ambil komentar hanya berdasarkan post_id yang terkait
         $this->comments = Comment::with('user')
             ->where('post_id', $this->post->id)
+            ->whereNull('parent_id') //Hanya mengambil komentar utama (parent_id null) beserta balasannya.
+            ->with(['user', 'replies.user'])
             ->latest()
             ->get();
     }
@@ -41,13 +49,13 @@ class Comments extends Component
         Comment::create([
             'body' => $this->newComment,
             'user_id' => auth()->id(),
-            'post_id' => $this->post->id  // Pastikan $post->id dikirim dengan benar
+            'post_id' => $this->post->id 
         ]);
 
         $this->newComment = '';
         $this->loadComments();
 
-        session()->flash('message', 'Comment added successfully!');
+        notify()->info('message', 'Comment added successfully!');
     }
 
     public function deleteComment($commentId)
@@ -59,8 +67,24 @@ class Comments extends Component
             $this->loadComments();
 
             // session()->flash('message', 'Comment deleted successfully!');
-            notify()->info('Blog Updated Successfully');
+            notify()->info('Comment Updated Successfully');
         }
+    }
+
+    public function addReply($commentId)
+    {
+        $this->validate(['replyComment' => 'required|min:2']);
+        
+        Comment::create([
+            'user_id' => auth()->id(),
+            'post_id' => $this->post->id,
+            'parent_id' => $commentId,
+            'body' => $this->replyComment,
+        ]);
+        
+        $this->replyComment = '';
+        $this->replyingTo = null;
+        notify()->info('message', 'Comment added successfully!');
     }
 
     public function render()
