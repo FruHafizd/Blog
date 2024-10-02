@@ -48,11 +48,15 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ Str::limit($post->title,15) }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ Str::limit($post->content, 18) }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                      <span class="{{ $post->pin_blog ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900' : 'bg-red-100 text-red-800 dark:bg-red-200 dark:text-red-900' }} text-xs font-medium px-2.5 py-0.5 rounded">
-                                        {{ $post->pin_blog ? 'Pinned' : 'Not Pinned' }}
-                                      </span>
-                                    
-                                    </td>
+                                      <div class="flex space-x-2">
+                                          <span class="{{ $post->pin_blog ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900' : 'bg-red-100 text-red-800 dark:bg-red-200 dark:text-red-900' }} text-xs font-medium px-2.5 py-1 rounded">
+                                              {{ $post->pin_blog ? 'Pinned' : 'Not Pinned' }}
+                                          </span>
+                                          <span class="{{ $post->archived ? 'bg-red-100 text-red-800 dark:bg-red-200 dark:text-red-900' : 'bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900' }} text-xs font-medium px-2.5 py-1 rounded">
+                                              {{ $post->archived ? 'Archived' : 'Active' }}
+                                          </span>
+                                      </div>
+                                    </td>                                  
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                                           <span class="inline-flex items-center bg-primary-100 text-primary-800 text-xs font-medium px-2 py-1 rounded-full shadow-md mr-2">
                                               <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">

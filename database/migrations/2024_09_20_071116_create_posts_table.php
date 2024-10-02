@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('view_count')->default(0);
             $table->boolean('pin_blog')->default(false);
             $table->text('short_description');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

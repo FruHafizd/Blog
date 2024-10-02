@@ -100,12 +100,20 @@
                     </div>
                     
     
-                    <!-- Pin Blog -->
-                    <div class="flex items-center">
-                        <input wire:model="pin_blog" type="checkbox" id="pin_blog"
-                               class="h-5 w-5 text-indigo-600 border-gray-300 dark:border-gray-600 rounded focus:ring-indigo-500">
-                        <label for="pin_blog" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Pin this blog</label>
+                   <!-- Pin Blog -->
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <input wire:model="pin_blog" type="checkbox" id="pin_blog"
+                                class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <label for="pin_blog" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Pin this blog</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input wire:model="archived" type="checkbox" id="archived"
+                                class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <label for="archived" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Archive this blog</label>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="mt-6 flex justify-end space-x-3">

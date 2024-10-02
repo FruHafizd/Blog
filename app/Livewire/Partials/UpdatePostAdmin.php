@@ -19,6 +19,7 @@ class UpdatePostAdmin extends Component
     public $published_at;
     public $image;
     public $pin_blog;
+    public $archived;
     public $category_id;
     public $categories;
     public $short_description;
@@ -32,6 +33,7 @@ class UpdatePostAdmin extends Component
         $this->short_description = $post->short_description;
         $this->slug = $post->slug;
         $this->pin_blog = (bool) $post->pin_blog;
+        $this->archived = (bool) $post->archived;
 
         $this->categories = Categories::all();
         $this->category_id = $post->categories_id;
@@ -45,6 +47,7 @@ class UpdatePostAdmin extends Component
         'short_description' => 'required',
         'image' => 'nullable|max:4093|mimes:avif,jpg,png,jpeg,gif',
         'pin_blog' => 'boolean',
+        'archived' => 'boolean',
         'category_id' => 'required|exists:categories,id',
         'slug' => 'required|unique:posts,slug,' . $this->post->id, 
         ]);
@@ -62,6 +65,7 @@ class UpdatePostAdmin extends Component
             'short_description' => $this->short_description,
             'slug' => $this->slug,
             'pin_blog' => $this->pin_blog,
+            'archived' => $this->archived,
             'categories_id' => $this->category_id, 
         ]);
 
