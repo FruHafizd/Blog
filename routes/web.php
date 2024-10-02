@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialiteController;
 use App\Livewire\Pages\Blog;
 use App\Livewire\Pages\DetailPost;
 use App\Livewire\Pages\HomePage;
@@ -47,3 +48,17 @@ require __DIR__.'/auth.php';
 
 // Route dinamis
 Route::get('/{slug}', DetailPost::class)->name('blog.detail');
+
+
+// Route Google
+
+// Untuk redirect ke Google
+Route::get('login/google/redirect', [SocialiteController::class, 'redirect'])
+    ->middleware(['guest'])
+    ->name('redirect');
+
+// Untuk callback dari Google
+Route::get('login/google/callback', [SocialiteController::class, 'callback'])
+    ->middleware(['guest'])
+    ->name('callback');
+

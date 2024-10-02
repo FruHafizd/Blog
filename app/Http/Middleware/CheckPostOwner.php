@@ -11,12 +11,20 @@ class CheckPostOwner
 {
     public function handle(Request $request, Closure $next)
     {
-        // Ambil post berdasarkan slug
-        $post = Posts::where('id', $request->id)->first();
+        $postId = $request->route('id');
+        // Menggunakan $request->route('id') lebih aman karena mengambil nilai dari parameter rute, bukan dari query string yang bisa dimanipulasi.
 
-        // Periksa apakah post ada dan pengguna adalah pemiliknya
-        if (!$post || (Auth::check() && Auth::id() !== $post->user_id)) {
-            return redirect()->route('homepage')->with('error', 'Unauthorized access');
+        // Pastikan user sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to access this page');
+        }
+
+        // Ambil post berdasarkan ID
+        $post = Posts::findOrFail($postId);
+
+        // Periksa apakah pengguna adalah pemiliknya
+        if (Auth::id() !== $post->user_id) {
+            abort(403, 'Unauthorized action');
         }
 
         return $next($request);
