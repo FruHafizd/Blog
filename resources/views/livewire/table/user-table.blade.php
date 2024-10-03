@@ -61,7 +61,8 @@
                                             @endforeach
 
                                             @foreach($users as $user)
-                                                @livewire('partials.view-user', ['user' => $user], key($user->id))
+                                            {{-- Modal View --}}
+                                            @livewire('partials.view-user', ['user' => $user], key($user->id))
                                             @endforeach
                                         </tbody>
                                     </table>

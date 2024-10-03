@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Table;
 
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class UserTable extends Component
 {
     use WithPagination;
-
+    
     public $search = '';
     protected $queryString = ['search' => ['except' => '']];
     

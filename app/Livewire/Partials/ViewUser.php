@@ -142,6 +142,9 @@ class ViewUser extends Component
     
     public function render()
     {
-        return view('livewire.partials.view-user',['user' => $this->user]);
+        return view('livewire.partials.view-user'
+        ,[
+            'users' => User::paginate(10), // Membatasi jumlah data user yang diambil
+        ]);
     }
 }
