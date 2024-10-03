@@ -1,116 +1,88 @@
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    
-    <!-- Card Blog -->
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <h1 class="text-4xl mb-7"><strong>Pin Blog</strong></h1>
-
-        <!-- Grid -->
-        <div class="grid lg:grid-cols-2 gap-6">
-        
-            @foreach ($pinBlog as $blog)
-            <!-- Card -->
-            <a class="group relative block rounded-xl focus:outline-none" href="/{{ $blog->slug }}">
-                <div class="shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-gray-900/70">
-                    <img class="size-full absolute top-0 start-0 object-cover" src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">
-                </div>
-                
-                <div class="absolute bottom-0 inset-x-0 z-10">
-                    <div class="flex flex-col h-full p-4 sm:p-6">
-                        <div class="flex justify-end">
-                            
-                        </div>
-                        <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/80 group-focus:text-white/80">
-                            {{$blog->title}}
-                        </h3>
-                        
-                    </div>
-                </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Pin Blog Section -->
+    <section class="mb-20">
+      <h2 class="text-4xl font-bold text-gray-900 mb-10">Featured Posts</h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        @foreach ($pinBlog as $blog)
+        <a href="/{{ $blog->slug }}" class="group">
+          <div class="relative overflow-hidden rounded-3xl shadow-lg transition-all duration-300 hover:shadow-2xl">
+            <div class="aspect-w-16 aspect-h-9">
+              <img class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90"></div>
+            <div class="absolute bottom-0 left-0 p-8">
+              <h3 class="text-3xl font-bold text-white mb-2 transition-all duration-300 group-hover:translate-y-[-5px]">{{ $blog->title }}</h3>
+              <p class="text-gray-200 text-sm hidden md:block">Read article</p>
+            </div>
+          </div>
+        </a>
+        @endforeach
+      </div>
+    </section>
+  
+    <!-- Latest Posts Section -->
+    <section class="mb-20">
+      <h2 class="text-4xl font-bold text-gray-900 mb-10">Latest Articles</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        @foreach ($post as $posts)
+        <article class="group">
+          <div class="overflow-hidden rounded-3xl shadow-md transition-all duration-300 group-hover:shadow-xl">
+            <div class="aspect-w-16 aspect-h-9">
+              <img class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" src="{{ asset('storage/' . $posts->image) }}" alt="{{ $posts->title }}">
+            </div>
+          </div>
+          <div class="mt-6">
+            <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4">
+              {{ $posts->categories->title }}
+            </span>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 transition-colors duration-300 group-hover:text-blue-600">{{ $posts->title }}</h3>
+            <p class="text-gray-600 mb-4 line-clamp-2">{{ $posts->short_description }}</p>
+            <a href="/{{ $posts->slug }}" class="inline-flex items-center text-blue-600 font-semibold transition-all duration-300 group-hover:translate-x-1">
+              Read more
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
-            <!-- End Card -->
-            @endforeach
-        
-
-        </div>
-        <!-- End Grid -->
-    </div>
-
-    <hr>
-    
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <h1 class="text-4xl mb-7"><strong>The latest</strong></h1>
-        
-        <!-- Grid dengan postingan -->
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach ($post as $posts)
-            <a class="p-4 transition border border-gray-200 shadow-md group hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded-xl" href="/{{ $posts->slug }}">
-                <div class="w-full h-40 overflow-hidden sm:h-52 lg:h-64 rounded-xl">
-                    <img class="object-cover w-full h-full rounded-xl" src="{{ asset('storage/' . $posts->image) }}" alt="Event Image">
-                </div>
-                <div class="flex justify-end items-center mt-4">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
-                        <span class="size-1.5 inline-block rounded-full bg-blue-800 dark:bg-blue-500"></span>
-                        {{ $posts->categories->title }}
-                    </span>
-                </div>
-                <h3 class="mt-4 text-lg font-semibold text-gray-800">
-                    <strong>{{ $posts->title }}</strong>
-                </h3>
-                <p class="mt-2 text-gray-600">
-                    {{ Str::limit( $posts->short_description, 180) }}                 
-                </p>
-                <p class="inline-flex items-center mt-3 text-sm font-semibold text-gray-800 gap-x-1">
-                    Learn more
-                    <svg class="transition ease-in-out shrink-0 group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </p>
+          </div>
+        </article>
+        @endforeach
+      </div>
+      <div class="text-right mt-10">
+        <a href="{{ route('blog') }}" class="inline-flex items-center text-blue-600 font-semibold group transition-all duration-300 hover:translate-x-1">
+          View All Articles
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </a>
+      </div>
+    </section>
+  
+    <!-- Most Read Section -->
+    <section>
+      <h2 class="text-4xl font-bold text-gray-900 mb-10">Most Popular</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        @foreach ($mostReadPosts as $posts)
+        <article class="group">
+          <div class="overflow-hidden rounded-3xl shadow-md transition-all duration-300 group-hover:shadow-xl">
+            <div class="aspect-w-16 aspect-h-9">
+              <img class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" src="{{ asset('storage/' . $posts->image) }}" alt="{{ $posts->title }}">
+            </div>
+          </div>
+          <div class="mt-6">
+            <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4">
+              {{ $posts->categories->title }}
+            </span>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 transition-colors duration-300 group-hover:text-blue-600">{{ $posts->title }}</h3>
+            <p class="text-gray-600 mb-4 line-clamp-2">{{ $posts->short_description }}</p>
+            <a href="{{ route('blog.detail', $posts->slug) }}" class="inline-flex items-center text-blue-600 font-semibold transition-all duration-300 group-hover:translate-x-1">
+              Read more
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
-            @endforeach  
-        </div>
-        
-        <!-- Tombol "View All" di pojok kanan bawah -->
-        <div class="relative mt-6">
-            <a href="{{ route('blog') }}" class="absolute right-0 inline-flex items-center text-sm font-semibold text-gray-800 gap-x-1 hover:text-blue-600 transition ease-in-out duration-300">
-                View All
-                <svg class="transition-transform ease-in-out duration-300 shrink-0 group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-        </div>
-    </div>
-
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <h1 class="text-4xl mb-7"><strong>Most Read</strong></h1>
-        
-        <!-- Grid dengan postingan -->
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach ($mostReadPosts as $posts)
-            <a class="p-4 transition border border-gray-200 shadow-md group hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 rounded-xl" href="{{ route('blog.detail', $posts->slug) }}">
-                <div class="w-full h-40 overflow-hidden sm:h-52 lg:h-64 rounded-xl">
-                    <img class="object-cover w-full h-full rounded-xl" src="{{ asset('storage/' . $posts->image) }}" alt="Event Image">
-                </div>
-                <div class="flex justify-end items-center mt-4">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
-                        <span class="size-1.5 inline-block rounded-full bg-blue-800 dark:bg-blue-500"></span>
-                        {{ $posts->categories->title }}
-                    </span>
-                </div>
-                <h3 class="mt-4 text-lg font-semibold text-gray-800">
-                    <strong>{{ $posts->title }}</strong>
-                </h3>
-                <p class="mt-2 text-gray-600">
-                    {{ Str::limit( $posts->short_description, 180) }}                 
-                </p>
-                <p class="inline-flex items-center mt-3 text-sm font-semibold text-gray-800 gap-x-1">
-                    Learn more
-                    <svg class="transition ease-in-out shrink-0 group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </p>
-            </a>
-            @endforeach  
-        </div>
-        
-        <!-- Tombol "View All" di pojok kanan bawah -->
-        <div class="relative mt-6">
-            <a href="{{ route('blog') }}" class="absolute right-0 inline-flex items-center text-sm font-semibold text-gray-800 gap-x-1 hover:text-blue-600 transition ease-in-out duration-300">
-                View All
-                <svg class="transition-transform ease-in-out duration-300 shrink-0 group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-        </div>
-    </div>
-</div>
+          </div>
+        </article>
+        @endforeach
+      </div>
+      <div class="text-right mt-10">
+        <a href="{{ route('blog') }}" class="inline-flex items-center text-blue-600 font-semibold group transition-all duration-300 hover:translate-x-1">
+          View All Popular Articles
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </a>
+      </div>
+    </section>
+  </div>
