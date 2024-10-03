@@ -15,6 +15,7 @@ class Category extends Component
     public $editingCategoryId;
     public $editingCategoryName;
     public $search = '';
+    protected $queryString = ['search' => ['except' => '']];
 
     protected $rules = [
         'name_category' => 'required|string|max:255|unique:categories,title',
@@ -37,7 +38,6 @@ class Category extends Component
         return redirect()->route('category');
     }
 
-
     public function deleteCategory($id)
     {
         try {
@@ -55,8 +55,9 @@ class Category extends Component
     public function render()
     {   
         $categories = Categories::withCount('posts')
-        ->where('title', 'like', '%' . $this->search . '%')
-        ->paginate(10);    
+            ->where('title', 'like', '%' . $this->search . '%')
+            ->paginate(10);
+        
         return view('livewire.table.category', compact('categories'));
     }
 }

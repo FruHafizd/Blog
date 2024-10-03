@@ -9,7 +9,13 @@
                                 <div class="py-3 px-4 flex items-center justify-between">
                                     <div class="relative max-w-xs flex-grow">
                                         <label for="hs-table-search" class="sr-only">Search</label>
-                                        <input type="text" name="hs-table-with-pagination-search" id="hs-table-with-pagination-search" class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Search for items" wire:model.live="search">
+                                        <input type="text" 
+                                            name="hs-table-with-pagination-search" 
+                                            id="hs-table-with-pagination-search" 
+                                            class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                                            placeholder="Search for items" 
+                                            wire:model.live.debounce.300ms="search">
+
                                         <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
                                             <svg class="size-4 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                                         </div>
@@ -111,20 +117,52 @@
                     Cannot Delete: Category In Use
                 </button>
             @else
-                <button type="button" wire:click="deleteCategory({{ $category->id }})"
-                    class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 ease-in-out dark:bg-red-700 dark:hover:bg-red-800">
-                    Delete Category
-                </button>
+                <form>
+                    @csrf
+                    <button type="button" wire:click.prevent="deleteCategory({{ $category->id }})"
+                        class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 ease-in-out dark:bg-red-700 dark:hover:bg-red-800">
+                        Delete Category
+                    </button>
+                </form>
             @endif
-            
                 
             </div>
         </div>
     </x-modal>
     
-    @livewire('partials.modal-update-category', ['categories' => $category->id], key($category->id))
+    <!-- Modal Blade Component -->
+    <x-modal name="category-update-{{ $category->id }}" focusable>
+        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">{{ __('Update Category') }}</h2>
 
+            <!-- Form action mengarah ke route update dengan ID kategori -->
+            <form action="{{ route('category.update', $category->id) }}" method="POST" class="space-y-6">
+                @csrf
+                @method('PATCH') <!-- Mengubah method menjadi PUT untuk update -->
 
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {{ __('Category Name') }}
+                    </label>
+                    <input id="title" name="title" type="text" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out"
+                        value="{{ old('title', $category->title) }}" required />
+
+                    @error('title')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" x-on:click="$dispatch('close')" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 ease-in-out dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600">
+                        {{ __('Cancel') }}
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                        {{ __('Update Category') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </x-modal>
 
     @endforeach
 </div>

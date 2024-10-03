@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialiteController;
 use App\Livewire\Pages\Blog;
@@ -10,6 +11,7 @@ use App\Livewire\Pages\PostEdit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckBanned; // Import the middleware
 use App\Livewire\Partials\ModalDelete;
+use App\Livewire\Partials\ModalUpdateCategory;
 
 Route::get('/', HomePage::class)->name('homepage');
 Route::get('/blog', Blog::class)->name('blog');
@@ -32,6 +34,7 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
             return view('category');
         })->name('category');
         
+        Route::patch('/categories/{category}', [CategoryController::class, 'update'])->name('category.update');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
