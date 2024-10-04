@@ -27,7 +27,7 @@ class Delete extends Component
     
         // Jika validasi berhasil, hapus post
         $post->delete();
-       // Set flash message
+        // Set flash message
         notify()->info('Blog Deleted Successfully');
         return redirect()->route('homepage'); 
     }

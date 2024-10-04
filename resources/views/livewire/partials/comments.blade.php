@@ -28,10 +28,12 @@
                         <p class="text-sm text-gray-500 mt-1">Posted by {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</p>
                     </div>
                     <div class="flex space-x-2">
-                        <button wire:click="$set('replyingTo', {{ $comment->id }})" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
-                            Reply
-                        </button>
-                        @if(auth()->id() == $comment->user_id || auth()->user()->hasRole('Admin'))
+                        @if (auth()->check())
+                            <button wire:click="$set('replyingTo', {{ $comment->id }})" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                                Reply
+                            </button>
+                        @endif
+                        @if(auth()->check()  && (auth()->id() == $comment->user_id || auth()->user()->hasRole('Admin')))
                             <button wire:click="deleteComment({{ $comment->id }})"
                                     onclick="return confirm('Are you sure you want to delete this comment?')"
                                     class="text-red-600 hover:text-red-800 transition-colors duration-200"

@@ -12,7 +12,7 @@ class Blog extends Component
     use WithPagination;
     
     public $selectedCategory = '';
-    public $perPage = 10;
+    public $perPage = 12;
 
     protected $queryString = ['selectedCategory'];
 

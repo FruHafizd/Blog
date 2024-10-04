@@ -72,7 +72,11 @@ class Comments extends Component
     }
 
     public function addReply($commentId)
-    {
+    {   
+        if (!auth()->check()) {
+            return redirect()->route('login'); // Redirect jika user belum login
+        }
+        
         $this->validate(['replyComment' => 'required|min:2']);
         
         Comment::create([

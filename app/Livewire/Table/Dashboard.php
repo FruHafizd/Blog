@@ -22,26 +22,22 @@ class Dashboard extends Component
     }   
 
     public function destroy($id)
-    {
-        dd('Method called');
-        // Mengambil post berdasarkan ID
-        $post = Posts::findOrFail($id);
-        
-        // Validasi slug yang dimasukkan
-        $this->validate([
-            'blog_slug' => 'required|string|in:' . $post->slug,
-        ]);
-
-        // Jika validasi berhasil, hapus post
-        $post->delete();
-
-        // Set flash message
-        notify()->info('Blog Deleted Successfully');
-        
-        // Kembali ke homepage atau halaman yang diinginkan
+    {   
+        // Hapus post jika validasi berhasil
+        try {
+            // Cari post berdasarkan ID, jika tidak ditemukan, akan mengembalikan 404
+            $post = Posts::destroy($id);
+            // $post->delete();
+            // Set flash message
+            notify()->info('Blog Deleted Successfully');
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan saat menghapus, bisa memberikan notifikasi error
+            notify()->error('Error deleting blog: ' . $e->getMessage());
+            return redirect()->back();
+        }
         return redirect()->route('dashboard'); 
     }
-
+    
 
     public function render()
     {

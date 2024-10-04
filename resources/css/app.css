@@ -26,6 +26,17 @@
     margin-bottom: 1rem; /* Tambahkan jarak bawah untuk paragraf */
 }
 
+.markdown-content a {
+    color: #3b82f6; /* Tailwind's text-blue-600 */
+    text-decoration: none; /* Remove underline */
+}
+
+.markdown-content a:hover {
+    color: #1d4ed8; /* Tailwind's text-blue-800 */
+    text-decoration: underline; /* Optional: add underline on hover */
+}
+
+
 .markdown-content ol, 
 .markdown-content ul {
     margin-top: 1rem; /* Tambahkan jarak atas untuk list */

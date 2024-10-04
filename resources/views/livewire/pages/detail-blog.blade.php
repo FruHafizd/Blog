@@ -3,36 +3,23 @@
 
         <div class="mb-4 md:mb-0 w-full relative">
             <div class="px-4 lg:px-0">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-4xl font-bold text-gray-800 leading-tight">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
                         {{ $post->title }}
                     </h2>
 
-                    {{-- 
-                    Auth::check(): Memeriksa apakah pengguna sudah login.
-
-                    Auth::user()->hasRole('Admin'), memeriksa apakah pengguna yang sedang login memiliki peran Admin.
-
-                    Auth::user()->id: Mendapatkan ID pengguna yang sedang login.
-
-                    $post->user_id: ID pengguna yang memiliki postingan.
-
-                    Jika kedua ID sama, maka link untuk mengedit blog akan ditampilkan.
-                    --}}
-                    
                     @if (Auth::check() && (Auth::user()->hasRole('Admin') || Auth::user()->id === $post->user_id))
-                    <div class="flex items-center space-x-2">
+                    <div class="mt-4 md:mt-0 flex items-center space-x-2">
                         <a href="{{ route('blog.edit', $post->id) }}" class="text-sm text-blue-600 hover:underline">
                             Update Blog
                         </a>
-                
-                        <!-- Tombol untuk membuka modal -->
                         <button type="button" x-on:click.prevent="$dispatch('open-modal', 'confirm-blog-deletion')" class="text-sm text-red-600 hover:underline">
                             Delete This Blog
                         </button>
                     </div>
                 @endif                
-                
+                </div>
+
                 <x-modal name="confirm-blog-deletion" :show="$errors->blogDeletion->isNotEmpty()" focusable>
                     <form method="post" action="{{ route('blog.delete', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">
                         @csrf
@@ -56,7 +43,7 @@
                                 name="blog_slug"
                                 type="text"
                                 placeholder="Enter Blog Slug to confirm"
-                                class="mt-1 block w-3/4 border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full md:w-3/4 border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
                                 required
                             />
                         </div>
@@ -73,10 +60,7 @@
                     </form>
                 </x-modal>
                 
-                </div>
-                <a 
-                    class="py-2 text-gray-400 inline-flex items-center justify-center mb-2"
-                >
+                <a class="py-2 text-gray-400 inline-flex items-center justify-center mb-2">
                     Last Updated At {{ \Carbon\Carbon::parse($post->updated_at)->format('d F Y') }}, By {{ $post->user->name ?? 'Unknown' }}
                 </a>
                 <div>
@@ -91,14 +75,11 @@
         </div>
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">
-
             <div class="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4 mx-auto markdown-content">
                 {!! $post->content !!}
             </div>
-            
-            
-
         </div>
     </main>
+
     @livewire('partials.comments', ['post' => $post])
 </div>

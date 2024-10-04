@@ -55,6 +55,11 @@ class MakeBlog extends Component
         }
     }
 
+    public function removeImage()
+    {
+        $this->image = null;
+    }
+
     public function generateSlug()
     {
         $this->slug = Str::slug($this->slug);
