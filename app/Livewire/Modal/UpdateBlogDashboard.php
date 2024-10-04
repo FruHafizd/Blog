@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Partials;
+namespace App\Livewire\Modal;
 
 use App\Models\Categories;
 use App\Models\Posts;
@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class UpdatePostAdmin extends Component
+class UpdateBlogDashboard extends Component
 {   
     use WithFileUploads;
 
@@ -23,7 +23,6 @@ class UpdatePostAdmin extends Component
     public $category_id;
     public $categories;
     public $short_description;
-
 
     public function mount(Posts $post)
     {
@@ -78,9 +77,9 @@ class UpdatePostAdmin extends Component
     {
         $this->slug = Str::slug($this->slug);
     }
-    
+
     public function render()
-    {   
-        return view('livewire.partials.update-post-admin');
+    {
+        return view('livewire.modal.update-blog-dashboard');
     }
 }

@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Livewire\Partials;
+namespace App\Livewire\Modal;
 
 use App\Models\Posts;
 use Livewire\Component;
 
-class ModalViewPosts extends Component
-{
+class ViewBlogDashboard extends Component
+{   
     public $post;
     public function mount($postId)
     {
         $this->post = Posts::findOrFail($postId);
     }
+
     public function render()
     {
-        return view('livewire.partials.modal-view-posts');
+        return view('livewire.modal.view-blog-dashboard');
     }
 }

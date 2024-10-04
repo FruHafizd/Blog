@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Partials;
+namespace App\Livewire\Modal;
 
 use App\Models\Categories;
 use Livewire\Component;
@@ -8,8 +8,8 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Str;
 use App\Models\Posts;
 
-class ModalMakeBlog extends Component
-{
+class MakeBlogDashboard extends Component
+{   
     use WithFileUploads;
 
     public $title;
@@ -62,7 +62,7 @@ class ModalMakeBlog extends Component
 
     public function render()
     {
-        return view('livewire.partials.modal-make-blog',[
+        return view('livewire.modal.make-blog-dashboard',[
             'categories' => Categories::all(), 
         ]);
     }

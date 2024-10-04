@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Pages;
 
+use Livewire\Component;
 use App\Models\Posts;
 use Illuminate\Http\Request;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Parsedown;
 
-class DetailPost extends Component
-{   
+class DetailBlog extends Component
+{
     public $slug;
     public $post;
 
@@ -52,8 +52,7 @@ class DetailPost extends Component
     }
 
     public function render()
-    {   
-        $post = $this->post;
-        return view('livewire.pages.detail-post',compact('post'));  
+    {
+        return view('livewire.pages.detail-blog');
     }
 }

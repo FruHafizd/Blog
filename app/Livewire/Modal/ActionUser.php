@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Partials;
+namespace App\Livewire\Modal;
 
 use App\Models\User;
 use Livewire\Component;
 
-class ViewUser extends Component
-{
+class ActionUser extends Component
+{   
     public $user;
     public $roles;
     public $name;
@@ -139,11 +139,10 @@ class ViewUser extends Component
         }
         return redirect()->route('user');
     }
-    
+
     public function render()
     {
-        return view('livewire.partials.view-user'
-        ,[
+        return view('livewire.modal.action-user' ,[
             'users' => User::paginate(10), // Membatasi jumlah data user yang diambil
         ]);
     }

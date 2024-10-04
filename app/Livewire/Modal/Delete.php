@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Livewire\Partials;
+namespace App\Livewire\Modal;
 
 use App\Models\Posts;
 use Illuminate\Http\Client\Request;
 use Livewire\Component;
 
-class ModalDelete extends Component
-{
+
+class Delete extends Component
+{   
     public $post;
 
     public function mount($idPost)
@@ -31,8 +32,9 @@ class ModalDelete extends Component
         return redirect()->route('homepage'); 
     }
 
+
     public function render()
     {
-        return view('livewire.partials.modal-delete', ['post' => $this->post]);
+        return view('livewire.modal.delete', ['post' => $this->post]);
     }
 }

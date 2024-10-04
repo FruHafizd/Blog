@@ -10,6 +10,8 @@ use App\Livewire\Pages\MakeBlog;
 use App\Livewire\Pages\PostEdit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckBanned; // Import the middleware
+use App\Livewire\Pages\BlogEdit;
+use App\Livewire\Pages\DetailBlog;
 use App\Livewire\Partials\ModalDelete;
 use App\Livewire\Partials\ModalUpdateCategory;
 
@@ -43,8 +45,8 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
 
     
     Route::get('/make-blog', MakeBlog::class)->name('blog.create');
-    Route::get('/edit/blog/{id}', PostEdit::class)->middleware(['post.owner'])->name('blog.edit');
-    Route::delete('/edit/blog/{id}', [DetailPost::class, 'destroy'])->name('blog.delete');
+    Route::get('/edit/blog/{id}', BlogEdit::class)->middleware(['post.owner'])->name('blog.edit');
+    Route::delete('/edit/blog/{id}', [DetailBlog::class, 'destroy'])->name('blog.delete');
 
 });
 
@@ -52,7 +54,7 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
 require __DIR__.'/auth.php';
 
 // Route dinamis
-Route::get('/{slug}', DetailPost::class)->name('blog.detail');
+Route::get('/{slug}', DetailBlog::class)->name('blog.detail');
 
 
 // Route Google

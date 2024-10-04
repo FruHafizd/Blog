@@ -8,7 +8,8 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
-class PostEdit extends Component
+
+class BlogEdit extends Component
 {   
     use WithFileUploads;
     public $title;
@@ -79,12 +80,9 @@ class PostEdit extends Component
     {
         $this->slug = Str::slug($this->slug);
     }
-    
+
     public function render()
     {
-        $post = Posts::find($this->postId); // Ambil objek post berdasarkan ID
-        
-        return view('livewire.pages.post-edit', compact('post'));
+        return view('livewire.pages.blog-edit');
     }
-
 }
