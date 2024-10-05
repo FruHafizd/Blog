@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckBanned; // Import the middleware
 use App\Livewire\Pages\BlogEdit;
 use App\Livewire\Pages\DetailBlog;
-use App\Livewire\Partials\ModalDelete;
-use App\Livewire\Partials\ModalUpdateCategory;
+use App\Livewire\Pages\LatestBlog;
+
 
 Route::get('/', HomePage::class)->name('homepage');
 Route::get('/blog', Blog::class)->name('blog');
+Route::get('/latest-blog', LatestBlog::class)->name('latest');
 
 
 // Group route yang memerlukan autentikasi
