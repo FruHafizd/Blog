@@ -94,7 +94,7 @@ This is a paragraph with **bold text** and *italic text*.
                     </div>
 
                     <!-- File Input -->
-                    <div x-data="{ imageUploaded: false }">
+                    <div x-data="{ imageUploaded: true }">
                         <label for="file-upload" class="block text-sm font-medium text-gray-700">Cover Image</label>
                         <div x-show="!imageUploaded"
                             class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -124,25 +124,28 @@ This is a paragraph with **bold text** and *italic text*.
                         <div x-show="imageUploaded" class="mt-4">
                             @if ($image)
                                 <div class="relative">
-                                    <img src="{{ $image->temporaryUrl() }}"
-                                        class="max-w-full h-auto rounded-md shadow-sm" alt="Preview Image">
-                                    <button type="button"
-                                        class="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100"
-                                        x-on:click="imageUploaded = false; $wire.removeImage()">
-                                        <svg class="h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M6 18L18 6M6 6l12 12" />
+                                    <img src="{{ $image->temporaryUrl()  }}" class="max-w-full h-auto rounded-md shadow-sm" alt="Preview Image">
+                                    <button type="button" class="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100" x-on:click="imageUploaded = false; $wire.removeImage()">
+                                        <svg class="h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            @elseif ($dbphoto)
+                                <div class="relative">
+                                    <img src="{{ $dbphoto }}" class="max-w-full h-auto rounded-md shadow-sm" alt="Preview Image">
+                                    <button type="button" class="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100" x-on:click="imageUploaded = false; $wire.removeImage()">
+                                        <svg class="h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     </button>
                                 </div>
                             @endif
-                            <button type="button"
-                                class="mt-4 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                x-on:click="imageUploaded = false; $wire.removeImage()">
+                            <button type="button" class="mt-4 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" x-on:click="imageUploaded = false; $wire.removeImage()">
                                 Upload New Image
                             </button>
                         </div>
+                        
                     </div>
 
                     <div class="flex items-center justify-end mt-6">

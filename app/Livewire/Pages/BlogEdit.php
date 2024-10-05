@@ -8,6 +8,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage; 
 
 class BlogEdit extends Component
 {   
@@ -15,30 +16,40 @@ class BlogEdit extends Component
     public $title;
     public $content;
     public $image;
+    public $dbphoto;
     public $postId;
     public $slug;
     public $category_id;
     public $categories;
     public $short_description;
-    
+    public $post;
+
     public function mount($id)
     {   
-        $post = Posts::where('id', $id)->first();
-        // Memastikan post ditemukan dan pengguna adalah pemiliknya
-        if (!$post || Auth::id() !== $post->user_id && !Auth::user()->hasRole('Admin')) {
-            abort(code: 403);
+        // Temukan post berdasarkan ID
+        $post = Posts::find($id);
+    
+        // Memastikan post ditemukan dan pengguna adalah pemiliknya atau admin
+        if (!$post || (Auth::id() !== $post->user_id && !Auth::user()->hasRole('Admin'))) {
+            abort(403);
         }
-
+    
+        // Inisialisasi properti untuk form
         $this->postId = $post->id;  
         $this->title = $post->title;
         $this->content = $post->content;
-        $this->image = null;
+    
+        // Dapatkan URL gambar dari penyimpanan lokal
+        $this->dbphoto = $post->image 
+            ? asset('storage/' . $post->image)  // Gunakan asset() untuk mendapatkan URL gambar di penyimpanan lokal
+            : '';
+    
         $this->slug = $post->slug;
         $this->short_description = $post->short_description;
-
+    
+        // Ambil semua kategori dan set kategori dari post
         $this->categories = Categories::all();
         $this->category_id = $post->categories_id;
-        
     }
     
     /**
@@ -79,6 +90,11 @@ class BlogEdit extends Component
     public function generateSlug()
     {
         $this->slug = Str::slug($this->slug);
+    }
+
+    public function removeImage()
+    {
+        $this->image = null;
     }
 
     public function render()
