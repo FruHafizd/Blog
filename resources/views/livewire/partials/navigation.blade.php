@@ -38,7 +38,7 @@
               Latest
             </a>
   
-            <a class="{{ request()->is('latest-blog') ? 'p-2 flex items-center text-sm text-blue-600 focus:outline-none focus:text-blue-600' : 'p-2 flex items-center text-sm text-gray-800 hover:text-gray-500 focus:outline-none focus:text-gray-500'}}" href="{{ route('latest') }}" >
+            <a class="{{ request()->is('contact') ? 'p-2 flex items-center text-sm text-blue-600 focus:outline-none focus:text-blue-600' : 'p-2 flex items-center text-sm text-gray-800 hover:text-gray-500 focus:outline-none focus:text-gray-500'}}" href="{{ route('contact') }}" >
               <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
               Contact
             </a>

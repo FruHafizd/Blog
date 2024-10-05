@@ -11,6 +11,7 @@ use App\Livewire\Pages\PostEdit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckBanned; // Import the middleware
 use App\Livewire\Pages\BlogEdit;
+use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\DetailBlog;
 use App\Livewire\Pages\LatestBlog;
 
@@ -18,6 +19,7 @@ use App\Livewire\Pages\LatestBlog;
 Route::get('/', HomePage::class)->name('homepage');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/latest-blog', LatestBlog::class)->name('latest');
+Route::get('/contact', Contact::class)->name('contact');
 
 
 // Group route yang memerlukan autentikasi
@@ -36,6 +38,10 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
         Route::get('/category', function () {
             return view('category');
         })->name('category');
+
+        Route::get('/report', function () {
+            return view('report');
+        })->name('report');
         
         Route::patch('/categories/{category}', [CategoryController::class, 'update'])->name('category.update');
     });
