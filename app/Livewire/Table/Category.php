@@ -3,6 +3,7 @@
 namespace App\Livewire\Table;
 
 use App\Models\Categories;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Log;
@@ -29,7 +30,7 @@ class Category extends Component
             Categories::create([
                 'title' => $this->name_category,
             ]);
-
+            Cache::forget('categories');
             notify()->success('message', 'Category created successfully!');
         } catch (\Exception $e) {
             Log::error('Failed to create category: ' . $e->getMessage());
@@ -43,7 +44,7 @@ class Category extends Component
         try {
             $category = Categories::findOrFail($id);
             $category->delete();
-
+            Cache::forget('categories');
             notify()->info('message', 'Category deleted successfully!');
         } catch (\Exception $e) {
             Log::error('Failed to delete category: ' . $e->getMessage());

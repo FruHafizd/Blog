@@ -121,7 +121,7 @@
                         {{ __('Cancel') }}
                     </x-secondary-button>
 
-                    <x-primary-button class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <x-primary-button  x-on:click="$wire.updateBlog()"  class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         {{ __('Update This Blog') }}
                     </x-primary-button>
                 </div>

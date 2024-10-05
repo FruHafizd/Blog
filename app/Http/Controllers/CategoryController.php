@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class CategoryController extends Controller
             $category->update([
                 'title' => $request->input('title'),
             ]);
-
+            Cache::forget('categories');
             // Berhasil update
             notify()->success('Category updated successfully!');
         } catch (\Exception $e) {

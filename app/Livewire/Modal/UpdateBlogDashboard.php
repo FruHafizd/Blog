@@ -4,6 +4,7 @@ namespace App\Livewire\Modal;
 
 use App\Models\Categories;
 use App\Models\Posts;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -26,15 +27,16 @@ class UpdateBlogDashboard extends Component
 
     public function mount(Posts $post)
     {
-        $this->post = $post;
+        $this->post =  Posts::with('categories')->find($post->id);
         $this->title = $post->title;
         $this->content = $post->content;
         $this->short_description = $post->short_description;
         $this->slug = $post->slug;
         $this->pin_blog = (bool) $post->pin_blog;
         $this->archived = (bool) $post->archived;
-
-        $this->categories = Categories::all();
+        $this->categories = Cache::remember('categories', 60, function () {
+            return Categories::all(); // Ambil semua kategori
+        });
         $this->category_id = $post->categories_id;
     }
 

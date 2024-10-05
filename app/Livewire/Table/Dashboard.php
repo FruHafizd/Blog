@@ -13,37 +13,26 @@ class Dashboard extends Component
 
     public $search = '';
     protected $queryString = ['search'=> ['except' => '']];
-    public $blog_slug; 
-    public $limitPerPage = 10;
-    
-    public function postData()
-    {
-        $this->limitPerPage = $this->limitPerPage;
-    }   
 
-    public function destroy($id)
-    {   
-        // Hapus post jika validasi berhasil
+    public function deleteBlog($id)
+    {
         try {
-            // Cari post berdasarkan ID, jika tidak ditemukan, akan mengembalikan 404
-            $post = Posts::destroy($id);
-            // $post->delete();
-            // Set flash message
-            notify()->info('Blog Deleted Successfully');
+            $post = Posts::findOrFail($id);
+            $post->delete();
+    
+            notify()->info('message', 'Blog deleted successfully!');
         } catch (\Exception $e) {
-            // Jika terjadi kesalahan saat menghapus, bisa memberikan notifikasi error
-            notify()->error('Error deleting blog: ' . $e->getMessage());
-            return redirect()->back();
+            notify()->info('error', 'Failed to delete the Blog. Please try again.');
         }
-        return redirect()->route('dashboard'); 
+        return redirect()->route('dashboard');
     }
     
 
     public function render()
-    {
-        // Inisialisasi query dengan relasi user dan categories
-        $query = Posts::with(['user', 'categories']);
-    
+    {   
+        // Paginasi dan urutkan berdasarkan data terbaru
+        $query = Posts::with('user', 'categories');  
+
         // Jika ada pencarian, filter berdasarkan title, user name, dan content
         if (!empty($this->search)) {
             $query->where(function($q) {
@@ -57,12 +46,10 @@ class Dashboard extends Component
                     });
             });
         }
-    
-        // Paginasi dan urutkan berdasarkan data terbaru
-        $posts = $query->latest()->paginate($this->limitPerPage);
-    
+
+        $posts = $query->latest()->paginate(15);
         // Mengembalikan view dengan data posts yang sudah difilter
-        return view('livewire.table.dashboard', ['posts' => $posts]);
+        return view('livewire.table.dashboard', compact('posts'));
     }
     
 
