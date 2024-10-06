@@ -138,7 +138,7 @@
             <!-- Form action mengarah ke route update dengan ID kategori -->
             <form action="{{ route('category.update', $category->id) }}" method="POST" class="space-y-6">
                 @csrf
-                @method('PATCH') <!-- Mengubah method menjadi PUT untuk update -->
+                @method('PATCH') 
 
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

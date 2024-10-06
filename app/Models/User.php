@@ -69,4 +69,9 @@ class User extends Authenticatable
         return $this->hasOne(Comment::class);
     }
 
+    public function report(): HasOne
+    {
+        return $this->hasOne(Report::class);
+    }
+
 }

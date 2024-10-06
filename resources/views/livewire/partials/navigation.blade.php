@@ -79,6 +79,10 @@
                         </a>
                         @endif
 
+                        <a class="py-1.5 px-2 flex items-center text-sm text-gray-800 hover:text-gray-500 focus:outline-none focus:text-gray-500" href="{{ route('your-blog') }}">
+                          {{ __('Your Blog') }}
+                        </a>
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             

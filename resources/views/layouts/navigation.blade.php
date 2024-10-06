@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('homepage') }}">
-                        <strong>Blog</strong>
+                        <strong class="dark:text-white">Blog</strong>
                     </a>
                 </div>
 
@@ -45,6 +45,15 @@
                     </x-nav-link>
                 </div>
                 @endif
+
+                
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('your-blog')" :active="request()->routeIs('your-blog')">
+                        {{ __('Blog') }}
+                    </x-nav-link>
+                </div>
+                
             
             </div>
 

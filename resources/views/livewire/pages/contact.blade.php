@@ -17,9 +17,9 @@
                         <select id="category" wire:model="category"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-3" required>
                             <option value="">-- Choose a category --</option>
-                            <option value="bug_report">Bug Report</option>
-                            <option value="content_suggestion">Content Suggestion</option>
-                            <option value="technical_issue">Technical Issue</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="Content Suggestion">Content Suggestion</option>
+                            <option value="Technical Issue">Technical Issue</option>
                         </select>
                         @error('category')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
