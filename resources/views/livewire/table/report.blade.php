@@ -38,12 +38,10 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $loop->iteration }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $reports->user->name}}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $reports->category}}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $reports->message }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ Str::limit($reports->message,30)}}</td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                    <button type="button" x-data @click.prevent="$dispatch('open-modal', 'report-view-{{ $reports->id }}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">View Report</button> |
-
-                                                    <button type="button" x-data @click.prevent="$dispatch('open-modal', 'confirm-category-deletion-{{ $reports->id }}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-none focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
+                                                    <button type="button" x-data @click.prevent="$dispatch('open-modal', 'report-view-{{ $reports->id }}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">View Report</button>
                                                 </td>
                                             </tr>
                                            
@@ -53,7 +51,7 @@
                                 </div>
                                 <div class="py-1 px-4">
                                     <nav class="flex items-center space-x-1" aria-label="Pagination">
-                                        {{-- {{ $categories->links('livewire.partials.posts-pagination') }}   --}}
+                                        {{ $report->links('livewire.partials.posts-pagination') }}  
                                     </nav>
                                 </div>
                             </div>
@@ -63,5 +61,55 @@
             </div>
         </div>
     </div>
+
+    @foreach ($report as $reports)
+    
+    <x-modal name="report-view-{{$reports->id}}" :show="$errors->userBannedError->isNotEmpty()" focusable>
+        <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-4xl sm:w-full">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6 border-b border-gray-200 dark:border-neutral-700 pb-4">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Detail Report</h2>
+                    <button type="button" x-on:click="$dispatch('close')" 
+                            class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="mb-4">
+                    <strong class="text-gray-700 dark:text-gray-300">Name User:</strong>
+                    <p class="text-gray-900 dark:text-white">{{ $reports->user->name }}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <strong class="text-gray-700 dark:text-gray-300">Category:</strong>
+                    <p class="text-gray-900 dark:text-white">{{ $reports->category }}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <strong class="text-gray-700 dark:text-gray-300">Message:</strong>
+                    <p class="text-gray-900 dark:text-white">{!! nl2br(e($reports->message)) !!}</p>
+                </div>
+                
+
+                <div class="flex justify-between mt-6">
+                    <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white dark:hover:bg-red-700"
+                    x-on:click="$wire.deleteReport({{ $reports->id }})" 
+                    >
+                        Delete Report
+                    </button>
+                    <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600" 
+                            x-on:click="$dispatch('close')">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>  
+    </x-modal>
+
+@endforeach
+
+
 
 </div>

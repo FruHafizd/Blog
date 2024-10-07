@@ -28,7 +28,7 @@ class Contact extends Component
                 'category' => $this->category,
                 'message' => $this->message,
             ]);
-
+            
              // Mengatur session dengan tipe dan pesan
             notify()->success('Message has ben send!');
             return redirect()->route("contact");

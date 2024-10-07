@@ -4,11 +4,29 @@ namespace App\Livewire\Table;
 
 use App\Models\Report as ModelsReport;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Report extends Component
 {   
+    use WithPagination;
+
     public $search = '';
-    protected $queryString = ['search' => ['except' => '']];
+
+    protected $queryString = ['search'=> ['except' => '']];
+    
+    public function deleteReport($id)
+    {
+        try {
+            $post = ModelsReport::findOrFail($id);
+            $post->delete();
+    
+            notify()->info('message', 'Report deleted successfully!');
+        } catch (\Exception $e) {
+            notify()->info('error', 'Failed to delete the Report. Please try again.');
+        }
+        return redirect()->route('report');
+    }
+
     public function render()
     {
         $query = ModelsReport::with('user');
