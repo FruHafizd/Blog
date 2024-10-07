@@ -3,12 +3,12 @@
     <!-- Grid -->
     <div class="text-center">
       <div>
-        <a class="flex-none text-xl font-semibold text-black dark:text-white" href="#" aria-label="Brand">Brand</a>
+        <a class="flex-none text-xl font-semibold text-black dark:text-white" href="#" aria-label="Brand">Blog</a>
       </div>
       <!-- End Col -->
   
       <div class="mt-3">
-        <p class="text-gray-500 dark:text-neutral-500">We are proud to be a part of the <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="#">Htmlstream</a> community.</p>
+        {{-- <p class="text-gray-500 dark:text-neutral-500">We are proud to be a part of the <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="#">Htmlstream</a> community.</p> --}}
         <p class="text-gray-500 dark:text-neutral-500">
             © 2024 FruHafizd. All rights reserved.
         </p>
