@@ -14,7 +14,7 @@ use App\Livewire\Pages\BlogEdit;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\DetailBlog;
 use App\Livewire\Pages\LatestBlog;
-
+use App\Livewire\Table\Blog as TableBlog;
 
 Route::get('/', HomePage::class)->name('homepage');
 Route::get('/blog', Blog::class)->name('blog');
@@ -58,6 +58,7 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
     Route::get('/make-blog', MakeBlog::class)->name('blog.create');
     Route::get('/edit/blog/{id}', BlogEdit::class)->middleware(['post.owner'])->name('blog.edit');
     Route::delete('/edit/blog/{id}', [DetailBlog::class, 'destroy'])->name('blog.delete');
+    Route::delete('/delete/blog/{id}', [TableBlog::class, 'destroy'])->name('your-blog.delete');
 
 });
 

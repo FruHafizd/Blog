@@ -24,9 +24,9 @@
                                   </svg>
                                 </div>
                               </div>
-                              <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" x-data @click.prevent="$dispatch('open-modal', 'add-blog')">
+                              <a type="button" href="{{ route('blog.create') }}" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" >
                                 Add Blog
-                              </button>
+                              </a>
                             </div>
                           </div>
                           <div class="overflow-hidden">
@@ -72,14 +72,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                       <button type="button" x-data @click.prevent="$dispatch('open-modal', 'view-blog-{{$post->id}}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">View</button> |
-                                      <button type="button" x-data @click.prevent="$dispatch('open-modal', 'confirm-blog-update-{{$post->id}}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-500 dark:hover:text-gray-400 dark:focus:text-gray-400">Update</button> |
                                       <button type="button" x-data @click.prevent="$dispatch('open-modal', 'confirm-blog-deletion-{{$post->id}}')" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-none focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
                                     </td>
                                 </tr>
 
-                                  @livewire('modal.update-blog-dashboard', ['post' => $post->id], key($post->id))
                               @endforeach
-                                  @livewire('modal.make-blog-dashboard')
+
                               </tbody>
                             </table>
                           </div>
@@ -100,43 +98,6 @@
 
     @foreach ($posts as $post)
 
-    {{-- Blog Deletion Confirmation Modal --}}
-    <x-modal name="confirm-blog-deletion-{{ $post->id }}" :show="$errors->blogDeletion->isNotEmpty()" focusable>
-      <div class="p-6">
-          {{-- Header --}}
-          <h2 class="text-xl font-bold text-gray-900 dark:text-gray-200">
-              {{ __('Confirm Article Deletion') }}
-          </h2>
-      
-          {{-- Body --}}
-          <p class="mt-4 text-sm text-gray-700 dark:text-gray-400">
-              {{ __('You are about to delete the article titled:') }} 
-              <strong class="font-medium">{{ $post->title }}</strong>
-          </p>
-          <p class="mt-2 text-sm text-gray-700 dark:text-gray-400">
-              {{ __('This action is permanent and cannot be undone. All data associated with this article will be permanently removed from the system.') }}
-          </p>
-          <p class="mt-2 text-sm font-semibold text-gray-700 dark:text-gray-400">
-              {{ __('Are you sure you want to proceed?') }}
-          </p>
-          
-          {{-- Action Buttons --}}
-          <div class="mt-8 flex justify-end space-x-3">
-              <button x-on:click="$dispatch('close')" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700">
-                  {{ __('Cancel') }}
-              </button>
-
-              <button type="button" 
-              x-on:click="$wire.deleteBlog({{ $post->id }})" 
-              {{-- Di atas pakai direktif alpine js --}}
-                class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 ease-in-out">
-                Delete Blog
-              </button>
-        
-          </div>
-      </div>
-    </x-modal>
-      
     {{-- Blog Information Modal --}}
     <x-modal name="view-blog-{{$post->id}}" :show="$errors->userBannedError->isNotEmpty()" focusable>
       <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-4xl sm:w-full">
@@ -216,7 +177,49 @@
       </div>
     </x-modal>
 
+    <x-modal name="confirm-blog-deletion-{{$post->id}}" :show="$errors->blogDeletion->isNotEmpty()" focusable>
+        <form method="post" action="{{ route('your-blog.delete', $post->id) }}" class="p-6 bg-white rounded-lg shadow-md">
+            @csrf
+            @method('DELETE')
+    
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-900">
+                {{ __('Confirm Deletion') }}
+            </h2>
+    
+            <p class="mt-1 text-sm text-gray-700 dark:text-gray-600">
+                {{ __('Are you sure you want to delete the blog with the slug:') }} 
+                <strong class="font-medium">{{ $post->slug }}</strong>?
+                {{ __('This action is irreversible. Once deleted, all related data will be permanently removed.') }}
+            </p>
+    
+            <div class="mt-6">
+                <x-input-label for="blog-title" value="{{ __('Blog Title') }}" class="sr-only" />
+    
+                <input
+                    id="blog_slug"
+                    name="blog_slug"
+                    type="text"
+                    placeholder="Enter Blog Slug to confirm"
+                    class="mt-1 block w-full md:w-3/4 border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                    required
+                />
+            </div>
+    
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+    
+                <x-danger-button class="ms-3">
+                    {{ __('Delete This Blog') }}
+                </x-danger-button>
+            </div>
+        </form>
+    </x-modal>
 
-   @endforeach
+    @endforeach
+
+
+
 
 </div>

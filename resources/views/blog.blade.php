@@ -6,7 +6,7 @@
     </x-slot>
 
 
-    
+    @livewire('table.blog')
 
 
     
