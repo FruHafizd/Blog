@@ -18,20 +18,20 @@ class DatabaseSeeder extends Seeder
     {
         
         // User::factory()->create();
-        // Posts::factory()->count(100)->create();
+        Posts::factory()->count(100)->create();
         // Categories::factory()->create();
 
-        $this->call(RoleAndPermissionSeeder::class);
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('admin'),
-        ]);
-        $user = User::first();
-        $user->assignRole('Admin');
-        $this->call([
-            CategoriesSeeder::class,
-            PostSeeder::class
-        ]);
+        // $this->call(RoleAndPermissionSeeder::class);
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => Hash::make('admin'),
+        // ]);
+        // $user = User::first();
+        // $user->assignRole('Admin');
+        // $this->call([
+        //     CategoriesSeeder::class,
+        //     PostSeeder::class
+        // ]);
     }
 }

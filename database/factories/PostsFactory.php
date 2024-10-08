@@ -17,13 +17,13 @@ class PostsFactory extends Factory
             'user_id' => User::factory(), 
             'title' => $this->faker->unique()->sentence(10),
             'content' => $this->faker->paragraph(5),
-            'short_description' => $this->faker->paragraph(2),
+            'short_description' => $this->faker->paragraph(1000),
             'slug' => $this->faker->unique()->slug,
             'published_at' => now(),
             'image' => 'images/hbp1hiWoyWeHs2Lqn1HcMHKEubhJD8mFiCyXRZA4.png', // Sesuaikan dengan path gambar yang ada
             'view_count' => 0,
             'pin_blog' => $this->faker->boolean,
-            'categories_id' => Categories::factory(), // Menggunakan factory untuk kategori
+            'categories_id' => 5, // Menggunakan factory untuk kategori
             'created_at' => now(),
             'updated_at' => now(),
         ];

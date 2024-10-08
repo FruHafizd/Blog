@@ -47,7 +47,7 @@ class Dashboard extends Component
             });
         }
 
-        $posts = $query->latest()->paginate(15);
+        $posts = $query->latest()->limit(15)->paginate(15);
         // Mengembalikan view dengan data posts yang sudah difilter
         return view('livewire.table.dashboard', compact('posts'));
     }

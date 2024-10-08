@@ -27,7 +27,7 @@ class UpdateBlogDashboard extends Component
 
     public function mount(Posts $post)
     {
-        $this->post =  Posts::with('categories')->find($post->id);
+        $this->post = $post;  // Post sudah di-eager load dengan categories
         $this->title = $post->title;
         $this->content = $post->content;
         $this->short_description = $post->short_description;
@@ -35,7 +35,7 @@ class UpdateBlogDashboard extends Component
         $this->pin_blog = (bool) $post->pin_blog;
         $this->archived = (bool) $post->archived;
         $this->categories = Cache::remember('categories', 60, function () {
-            return Categories::all(); // Ambil semua kategori
+            return Categories::all();
         });
         $this->category_id = $post->categories_id;
     }

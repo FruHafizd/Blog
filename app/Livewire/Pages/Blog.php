@@ -18,7 +18,7 @@ class Blog extends Component
 
     public function render()
     {
-        $post = Posts::where('archived', false)->when($this->selectedCategory, function ($query) {
+        $post = Posts::with('categories')->where('archived', false)->when($this->selectedCategory, function ($query) {
             return $query->where('categories_id', $this->selectedCategory);
         })->paginate($this->perPage);
 

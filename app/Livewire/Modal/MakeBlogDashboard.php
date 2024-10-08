@@ -19,7 +19,7 @@ class MakeBlogDashboard extends Component
     public $slug;
     public $short_description;
     public $category_id; // Properti untuk kategori
-    public $categories; 
+
 
     /**
      * List of add/edit form rules
@@ -37,7 +37,7 @@ class MakeBlogDashboard extends Component
     {
         $this->validate();
         try {
-            Posts::with('categories')->create([ 
+            Posts::create([ 
                 'user_id' => auth()->user()->id, // Ambil ID pengguna yang sedang login
                 'title' => $this->title,
                 'content' => $this->content,
@@ -63,10 +63,9 @@ class MakeBlogDashboard extends Component
 
     public function render()
     {
-        $posts = Posts::with('categories')->get(); // Eager loading kategori saat mengambil post
-        return view('livewire.modal.make-blog-dashboard', [
-            'posts' => $posts,
-        ]);
+        $categories = Categories::all();
+        return view('livewire.modal.make-blog-dashboard', compact('categories'));
     }
     
+
 }
