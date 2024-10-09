@@ -27,6 +27,14 @@ class Report extends Component
         return redirect()->route('report');
     }
 
+    public function makeIsRead($id)
+    {
+        $report = ModelsReport::find($id);
+        $report->is_read = true; // Tandai sebagai dibaca
+        $report->save();
+        redirect()->route('report');
+    }
+
     public function render()
     {
         $query = ModelsReport::with('user');

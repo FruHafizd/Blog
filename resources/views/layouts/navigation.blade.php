@@ -40,12 +40,36 @@
                 @if(auth()->user()->hasRole('Admin'))
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('report')" :active="request()->routeIs('report')">
+                    <x-nav-link :href="route('report')" :active="request()->routeIs('report')" class="relative">
                         {{ __('Report') }}
+                        @php
+                            $hasNewReports = \App\Models\Report::where('is_read', false)->exists();
+                        @endphp
+                        @if($hasNewReports)
+                            <span class="absolute top-5 right-0 flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
+                        @endif
                     </x-nav-link>
                 </div>
                 @endif
 
+                    <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('report')" :active="request()->routeIs('report')" class="relative">
+                        {{ __('Report') }}
+                        @php
+                            $hasNewReports = \App\Models\Report::where('is_read', false)->exists();
+                        @endphp
+                        @if($hasNewReports)
+                            <span class="absolute top-5 right-0 flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
+                        @endif
+                    </x-nav-link>
+                </div>
                 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -139,6 +163,39 @@
                     {{ __('Category') }}
                 </x-responsive-nav-link>
             @endif
+            
+            @if(auth()->user()->hasRole('Admin'))
+                <x-responsive-nav-link :href="route('report')" :active="request()->routeIs('report')" class="relative">
+                    {{ __('Report') }}
+                    @php
+                        $hasNewReports = \App\Models\Report::where('is_read', false)->exists();
+                    @endphp
+                    @if($hasNewReports)
+                        <span class="absolute top-5 right-0 flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                    @endif
+                </x-responsive-nav-link>
+            @endif
+
+            <x-responsive-nav-link :href="route('report')" :active="request()->routeIs('report')" class="relative">
+                {{ __('Report') }}
+                @php
+                    $hasNewReports = \App\Models\Report::where('is_read', false)->exists();
+                @endphp
+                @if($hasNewReports)
+                    <span class="absolute top-5 right-0 flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                @endif
+            </x-responsive-nav-link>
+
+                <!-- Navigation Links -->
+            <x-responsive-nav-link :href="route('your-blog')" :active="request()->routeIs('your-blog')">
+                    {{ __('Blog') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
