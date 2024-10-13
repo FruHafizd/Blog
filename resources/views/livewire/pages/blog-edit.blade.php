@@ -23,35 +23,32 @@
                     </div>
 
                    <!-- Content Textarea -->
-                   <div>
-                       <label for="content" class="block text-sm font-medium text-gray-700">Blog Content</label>
-                       <p class="mt-2 text-sm text-gray-600">
-                           Tips for writing blog content neatly:
-                           <ul class="list-disc list-inside mt-1">
-                               <li>Use <strong>**bold text**</strong> to make text bold.</li>
-                               <li>Use <strong>*italic text*</strong> to italicize text.</li>
-                               <li>Use <strong>1.</strong> for ordered lists and <strong>-</strong> for unordered lists.</li>
-                               <li>To insert an image, use the format: <code>![alt text](image URL)</code>.</li>
-                               <li>Use <strong>[link text](URL)</strong> to insert hyperlinks.</li>
-                           </ul>
-                           You can see an example of Markdown format below:
-                           <pre class="mt-2 bg-gray-100 p-2 rounded">
-This is a paragraph with **bold text** and *italic text*.
-
-- Item 1
-- Item 2
-
-[Link to source](http://example.com)
-                           </pre>
-                       </p>
-
-                       <textarea id="content" rows="4"
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-3"
-                           placeholder="Write your blog content here" wire:model="content" required></textarea>
-                       @error('content')
-                           <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                       @enderror
-                   </div>
+                   <div class="relative">
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="content" class="block text-sm font-medium text-gray-700">Blog Content</label>
+                        <button
+                            type="button"
+                            x-on:click.prevent="$dispatch('open-modal', 'instruction-parsedown')"
+                            class="inline-flex items-center justify-center w-6 h-6 text-sm font-semibold text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            aria-label="Show instructions"
+                        >
+                            ?
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <textarea
+                            id="content"
+                            rows="6"
+                            class="block w-full px-4 py-3 text-base text-gray-700 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-y"
+                            placeholder="Write your blog content here..."
+                            wire:model="content"
+                            required
+                        ></textarea>
+                    </div>
+                    @error('content')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
 
                     <!-- Short Description -->
                     <div>
@@ -158,4 +155,30 @@ This is a paragraph with **bold text** and *italic text*.
             </div>
         </div>
     </div>
+    <x-modal name="instruction-parsedown" focusable>
+        <div class="p-8 max-w-2xl mx-auto bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Tips for Writing Blog Content</h2>
+            <div class="space-y-4">
+                <p class="text-gray-600">Use these Markdown tips to format your blog content neatly:</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li>Use <code class="bg-gray-100 rounded px-1">**bold text**</code> for <strong>bold text</strong></li>
+                    <li>Use <code class="bg-gray-100 rounded px-1">*italic text*</code> for <em>italic text</em></li>
+                    <li>Use <code class="bg-gray-100 rounded px-1">1.</code> for ordered lists and <code class="bg-gray-100 rounded px-1">-</code> for unordered lists</li>
+                    <li>For images: <code class="bg-gray-100 rounded px-1">![alt text](image URL)</code></li>
+                    <li>For links: <code class="bg-gray-100 rounded px-1">[link text](URL)</code></li>
+                </ul>
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Example:</h3>
+                    <pre class="bg-gray-50 p-4 rounded-md text-sm text-gray-700 overflow-x-auto">
+    This is a paragraph with **bold text** and *italic text*.
+    
+    - Item 1
+    - Item 2
+    
+    [Link to source](http://example.com)
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </x-modal>
 </div>

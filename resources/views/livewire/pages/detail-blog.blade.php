@@ -3,21 +3,21 @@
 
         <div class="mb-4 md:mb-0 w-full relative">
             <div class="px-4 lg:px-0">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+                <div class="space-y-4 sm:space-y-0 sm:flex sm:justify-between sm:items-start">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 leading-tight sm:max-w-[70%]">
                         {{ $post->title }}
                     </h2>
-
+                
                     @if (Auth::check() && (Auth::user()->hasRole('Admin') || Auth::user()->id === $post->user_id))
-                    <div class="mt-4 md:mt-0 flex items-center space-x-2">
-                        <a href="{{ route('blog.edit', $post->id) }}" class="text-sm text-blue-600 hover:underline">
-                            Update Blog
-                        </a>
-                        <button type="button" x-on:click.prevent="$dispatch('open-modal', 'confirm-blog-deletion')" class="text-sm text-red-600 hover:underline">
-                            Delete This Blog
-                        </button>
-                    </div>
-                @endif                
+                        <div class="flex items-center space-x-4 sm:ml-4">
+                            <a href="{{ route('blog.edit', $post->id) }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">
+                                Edit
+                            </a>
+                            <button type="button" x-on:click.prevent="$dispatch('open-modal', 'confirm-blog-deletion')" class="text-sm font-medium text-red-600 hover:text-red-800 transition duration-150 ease-in-out">
+                                Delete
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
                 <x-modal name="confirm-blog-deletion" :show="$errors->blogDeletion->isNotEmpty()" focusable>
