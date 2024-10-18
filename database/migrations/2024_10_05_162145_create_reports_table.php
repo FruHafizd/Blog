@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('category');
             $table->text('message');
             $table->boolean('is_read')->default(false);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

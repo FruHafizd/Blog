@@ -11,6 +11,7 @@
                 @endif
 
                 <form wire:submit.prevent="submit" class="space-y-8">
+                    <x-honeypot livewire-model="extraFields" />
                     <!-- Title Input -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700">Blog Title</label>

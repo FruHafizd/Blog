@@ -102,14 +102,14 @@
                         </svg>
                     </button>
                 </div>
-
+    
                 <div class="mb-4">
                     <strong class="text-gray-700 dark:text-gray-300">Name User:</strong>
                     <p class="text-gray-900 dark:text-white">{{ $reports->user->name }}</p>
                 </div>
-
+    
                 <div class="mb-4">
-                    <strong class="text-gray-700 dark:text-gray-300">Name User:</strong>
+                    <strong class="text-gray-700 dark:text-gray-300">Email:</strong>
                     <p class="text-gray-900 dark:text-white">{{ $reports->user->email }}</p>
                 </div>
                 
@@ -123,7 +123,16 @@
                     <p class="text-gray-900 dark:text-white">{!! nl2br(e($reports->message)) !!}</p>
                 </div>
                 
-
+                <!-- New Image Section -->
+                <div class="mb-4">
+                    <strong class="text-gray-700 dark:text-gray-300">Image:</strong>
+                    @if($reports->image)
+                        <img src="{{ asset('storage/' . $reports->image) }}" alt="Report Image" class="mt-2 rounded-lg max-w-full h-auto">
+                    @else
+                        <p class="text-gray-500 dark:text-gray-400 italic">No image attached</p>
+                    @endif
+                </div>
+    
                 <div class="flex justify-between mt-6 space-x-4">
                     <button type="button" 
                             class="flex-1 inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-colors duration-300"

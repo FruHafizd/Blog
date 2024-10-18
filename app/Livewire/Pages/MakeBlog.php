@@ -6,9 +6,12 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Posts;
 use Livewire\WithFileUploads;
+use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
+use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
 
 class MakeBlog extends Component
 {   
+    use UsesSpamProtection;
     use WithFileUploads;
     public $title;
     public $content;
@@ -29,10 +32,17 @@ class MakeBlog extends Component
         'slug' => 'required|unique:posts,slug', 
     ];
 
+    public HoneypotData $extraFields;
+    
+    public function mount()
+    {
+        $this->extraFields = new HoneypotData();
+    }
+
     public function submit()
     {
         $this->validate();
-
+        $this->protectAgainstSpam(); // if is spam, will abort the request
         try {
             $slug = Str::slug(trim($this->slug));
 

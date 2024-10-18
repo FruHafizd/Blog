@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mckenziearts/laravel-notify": "^2.5",
+        "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {
