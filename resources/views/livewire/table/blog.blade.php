@@ -45,7 +45,7 @@
                                   <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{{ Str::limit($post->content, 120) }}</p>
                                   <div class="flex justify-between items-center">
                                       <div class="flex items-center">
-                                          <img class="h-8 w-8 rounded-full mr-2 object-cover" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->name }}">
+                                          
                                           <span class="text-sm text-gray-600 dark:text-gray-400">{{ $post->user->name }}</span>
                                       </div>
                                       <span class="inline-flex items-center bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">
@@ -92,7 +92,7 @@
                   </div>
 
                   <div class="mt-8">
-                      {{ $posts->links('livewire.partials.posts-pagination') }}
+                        {{ $posts->links('livewire.partials.pagination') }}
                   </div>
               </div>
           </div>

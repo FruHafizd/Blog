@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'banned_until',
         'banned_reason',
+        'profile_picture',
     ];
 
     protected $dates = [

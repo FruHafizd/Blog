@@ -65,7 +65,7 @@ class Report extends Component
             });
         }
 
-        $report = $query->latest()->paginate(15);
+        $report = $query->latest()->paginate(perPage: 15);
         return view('livewire.table.report',compact('report'));
     }
 }
