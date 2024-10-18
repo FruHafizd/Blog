@@ -22,6 +22,7 @@ Route::get('/latest-blog', LatestBlog::class)->name('latest');
 Route::get('/contact', Contact::class)->name('contact');
 
 
+
 // Group route yang memerlukan autentikasi
 Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned here
     
@@ -39,12 +40,16 @@ Route::middleware(['auth','banned'])->group(function () { // Apply CheckBanned h
             return view('category');
         })->name('category');
 
-        Route::get('/report', function () {
+        Route::get('/admin-report', function () {
             return view('report');
-        })->name('report');
+        })->name('admin-report');
         
         Route::patch('/categories/{category}', [CategoryController::class, 'update'])->name('category.update');
     });
+
+    Route::get('/report', function () {
+        return view('user-report');
+    })->name('report');
 
     Route::get('/blog-you', function () {
         return view('blog');

@@ -11,6 +11,7 @@ class Report extends Component
     use WithPagination;
 
     public $search = '';
+    public $reply;
 
     protected $queryString = ['search'=> ['except' => '']];
     
@@ -24,7 +25,7 @@ class Report extends Component
         } catch (\Exception $e) {
             notify()->info('error', 'Failed to delete the Report. Please try again.');
         }
-        return redirect()->route('report');
+        return redirect()->route('admin-report');
     }
 
     public function makeIsRead($id)
@@ -32,8 +33,25 @@ class Report extends Component
         $report = ModelsReport::find($id);
         $report->is_read = true; // Tandai sebagai dibaca
         $report->save();
-        redirect()->route('report');
+        redirect()->route('admin-report');
     }
+
+    public function sendReply($reportId)
+    {
+        $this->validate([
+            'reply' => 'required|string',
+        ]);
+
+        $report = ModelsReport::find($reportId);
+        $report->admin_response = $this->reply;
+        $report->is_read_user = true; // Tandai sebagai dibaca
+        $report->save();
+
+        $this->reply = '';
+        notify()->info('message', 'Reply sent successfully.');
+        redirect()->route('admin-report');
+    }
+
 
     public function render()
     {

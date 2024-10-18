@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('message');
             $table->boolean('is_read')->default(false);
             $table->string('image')->nullable();
+            $table->text('admin_response')->nullable();
+            $table->boolean('is_read_user')->default(false);
             $table->timestamps();
         });
     }

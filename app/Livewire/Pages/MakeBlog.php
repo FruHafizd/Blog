@@ -38,7 +38,7 @@ class MakeBlog extends Component
     {
         $this->extraFields = new HoneypotData();
     }
-
+    
     public function submit()
     {
         $this->validate();

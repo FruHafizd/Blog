@@ -34,8 +34,6 @@ class Blog extends Component
         return redirect()->route('your-blog'); 
     }
 
-
-
     public function render()
     {   
         /**

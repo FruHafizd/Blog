@@ -133,6 +133,26 @@
                     @endif
                 </div>
     
+                <!-- Admin Reply Form -->
+                <form wire:submit.prevent="sendReply({{ $reports->id }})" class="mb-4">
+                    <div>
+                        <label for="reply" class="block text-gray-700 dark:text-gray-300 font-semibold">Reply to User:</label>
+                        <textarea wire:model.defer="reply" id="reply" rows="4" 
+                                  class="mt-2 w-full rounded-lg border border-gray-300 dark:border-neutral-600 
+                                         focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 
+                                         dark:text-white dark:placeholder-gray-400" 
+                                  placeholder="Write your reply here..."></textarea>
+                        @error('reply') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mt-4 text-right">
+                        <button type="submit" 
+                                class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 
+                                       rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            Send Reply
+                        </button>
+                    </div>
+                </form>
+    
                 <div class="flex justify-between mt-6 space-x-4">
                     <button type="button" 
                             class="flex-1 inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-colors duration-300"
@@ -162,6 +182,7 @@
             </div>
         </div>  
     </x-modal>
+    
 
 @endforeach
 
