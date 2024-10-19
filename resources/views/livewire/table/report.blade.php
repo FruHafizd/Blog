@@ -74,6 +74,16 @@
                                         @endforeach
                                         </tbody>
                                     </table>
+                                    @if ($report->isEmpty())
+                                    <div class="col-span-full text-center py-20 rounded-lg">
+                                        <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                        </svg>
+                                        <p class="text-gray-500 dark:text-gray-400 text-2xl font-semibold">No reports available at the moment.</p>
+                                        <p class="mt-2 text-gray-400 dark:text-gray-500">Once reports are submitted, they will be displayed here.</p>
+                                        
+                                    </div>
+                                    @endif
                                 </div>
                                 <div class="py-1 px-4">
                                     <nav class="flex items-center space-x-1" aria-label="Pagination">

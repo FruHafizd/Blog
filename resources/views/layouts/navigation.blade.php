@@ -167,7 +167,7 @@
             @endif
             
             @if(auth()->user()->hasRole('Admin'))
-                <x-responsive-nav-link :href="route('report')" :active="request()->routeIs('report')" class="relative">
+                <x-responsive-nav-link :href="route('admin-report')" :active="request()->routeIs('admin-report')" class="relative">
                     {{ __('Report') }}
                     @php
                         $hasNewReports = \App\Models\Report::where('is_read', false)->exists();
@@ -184,7 +184,9 @@
             <x-responsive-nav-link :href="route('report')" :active="request()->routeIs('report')" class="relative">
                 {{ __('Report') }}
                 @php
-                    $hasNewReports = \App\Models\Report::where('is_read', false)->exists();
+                    $hasNewReports = \App\Models\Report::where('user_id', Auth::id())
+                                                        ->where('is_read_user', true)
+                                                        ->exists();
                 @endphp
                 @if($hasNewReports)
                     <span class="absolute top-5 right-0 flex h-2 w-2">
