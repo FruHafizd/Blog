@@ -1,4 +1,3 @@
-```markdown
 # Deskripsi Blog
 
 Selamat datang di repositori blog ini! Proyek ini adalah platform blog yang sedang dalam tahap pengembangan. Kami bertujuan untuk menciptakan ruang yang nyaman bagi para penulis dan pembaca untuk berbagi dan menemukan konten yang menarik.
