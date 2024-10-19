@@ -152,12 +152,7 @@
                       @endif
                   </div>
               </div>
-          </x-modal>
-          
-            
-            
-            
-
+            </x-modal>
 
             </div>
             <!-- End Button Group -->

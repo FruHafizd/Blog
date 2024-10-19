@@ -15,6 +15,13 @@
                 </select>
             </div>
         </div>
+        <!-- If no posts are available -->
+        @if($post->isEmpty())
+            <div class="text-center py-16">
+                <h2 class="text-2xl font-semibold text-gray-600 dark:text-gray-300">No blog posts available at the moment.</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">Check back later or explore different categories.</p>
+            </div>
+        @else
 
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($post as $posts)
@@ -43,7 +50,7 @@
             </article>
             @endforeach  
         </div>
-
+        @endif
         <!-- Pagination -->
         <div class="mt-12">
             {{ $post->links('livewire.partials.pagination') }}
