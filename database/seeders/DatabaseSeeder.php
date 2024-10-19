@@ -22,16 +22,16 @@ class DatabaseSeeder extends Seeder
         // Categories::factory()->create();
 
         $this->call(RoleAndPermissionSeeder::class);
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('admin'),
-        ]);
-        $user = User::first();
-        $user->assignRole('Admin');
-        $this->call([
-            CategoriesSeeder::class,
-            PostSeeder::class
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => Hash::make('admin'),
+        // ]);
+        // $user = User::first();
+        // $user->assignRole('Admin');
+        // $this->call([
+        //     CategoriesSeeder::class,
+        //     PostSeeder::class
+        // ]);
     }
 }
