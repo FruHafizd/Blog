@@ -12,6 +12,7 @@ class Comments extends Component
     public $post;
     public $replyingTo = null;
     public $replyComment = '';
+    
     /**
      * $replyingTo: Menyimpan ID komentar yang sedang dibalas (jika ada).
      * $replyComment: Menyimpan teks komentar balasan.

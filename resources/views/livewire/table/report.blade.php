@@ -81,7 +81,6 @@
                                         </svg>
                                         <p class="text-gray-500 dark:text-gray-400 text-2xl font-semibold">No reports available at the moment.</p>
                                         <p class="mt-2 text-gray-400 dark:text-gray-500">Once reports are submitted, they will be displayed here.</p>
-                                        
                                     </div>
                                     @endif
                                 </div>

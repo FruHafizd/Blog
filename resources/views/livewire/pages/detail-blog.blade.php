@@ -75,8 +75,8 @@
         </div>
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">
-            <div class="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4 mx-auto markdown-content">
-                {!! $post->content !!}
+            <div class="prose max-w-none px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4 mx-auto markdown-content">
+                {{ new Illuminate\Support\HtmlString($post->content) }}
             </div>
         </div>
     </main>

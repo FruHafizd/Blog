@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         // Posts::factory()->count(100)->create();
         // Categories::factory()->create();
 
-        $this->call(RoleAndPermissionSeeder::class);
+        // $this->call(RoleAndPermissionSeeder::class);
         // User::factory()->create([
         //     'name' => 'Admin',
         //     'email' => 'admin@admin.com',
@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         // $user = User::first();
         // $user->assignRole('Admin');
-        // $this->call([
-        //     CategoriesSeeder::class,
-        //     PostSeeder::class
-        // ]);
+        $this->call([
+            CategoriesSeeder::class,
+            // PostSeeder::class
+        ]);
     }
 }

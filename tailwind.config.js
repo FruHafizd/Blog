@@ -22,6 +22,7 @@ export default {
     plugins: [
         forms,
         require('preline/plugin'),
+        require('@tailwindcss/typography'),
     ],
 
     darkMode: 'class' // Just add this line at the bottom.
