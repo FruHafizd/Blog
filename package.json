@@ -19,5 +19,8 @@
     "dependencies": {
         "preline": "^2.4.1",
         "toastr": "^2.1.4"
+    },
+    "engines": {
+        "node": "18.x"
     }
 }
