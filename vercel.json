@@ -17,9 +17,9 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "fruhafizd-portofolio.vercel.app",
-        "APP_KEY": "base64:TGaVaXwhWgjn9akhE4SCSIjGG/cQqvICUQ+PgLA3Bs0=",
+        "APP_KEY": "base64:BIhFhu+eKjSWQk1bKozFAZJ2pvpU9wwRQtycNPDQ3Po=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
