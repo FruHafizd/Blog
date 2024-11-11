@@ -28,7 +28,13 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie"
+        "SESSION_DRIVER": "cookie",
+        "DB_CONNECTION":"mysql",
+        "DB_HOST":"tya2t.h.filess.io",
+        "DB_PORT":"3306",
+        "DB_DATABASE":"Blog_moonremove",
+        "DB_USERNAME":"Blog_moonremove",
+        "DB_PASSWORD":"3d11a98cac84c8b0774043d2b81c492e59e90cab"
     },
     "outputDirectory": "public"
 }
