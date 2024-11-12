@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>{{ $title ?? 'Blog' }}</title>
     @livewireStyles
     <link rel="stylesheet" href="{{ asset('vendor/mckenziearts/laravel-notify/css/notify.css') }}">
