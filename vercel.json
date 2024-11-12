@@ -11,7 +11,7 @@
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "fruhafizd-portofolio.vercel.app",
+        "APP_URL": "blog-nine-iota-54.vercel.app",
         "APP_KEY": "base64:BIhFhu+eKjSWQk1bKozFAZJ2pvpU9wwRQtycNPDQ3Po=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
