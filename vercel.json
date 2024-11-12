@@ -1,19 +1,12 @@
 {
     "version": 2,
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.6.0"
-        }
-    },
+    "builds": [
+        { "src": "api/index.php", "use": "vercel-php@0.6.0" },
+        { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "public" } }
+    ],
     "routes": [
-        {
-            "src": "/img/(.*)",
-            "dest": "/public/img/"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
-        }
+        { "src": "/img/(.*)", "dest": "/storage/app/public/images/" },
+        { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {
         "APP_ENV": "production",
@@ -30,5 +23,6 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie"
     },
-    "outputDirectory": "public"
+    "outputDirectory": "public",
+    "buildCommand": "npm install && npm run build"
 }
