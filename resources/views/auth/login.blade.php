@@ -9,23 +9,23 @@
         </div>
     @endif
 
-    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
+    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm ">
 
      
 
         <div class="p-4 sm:p-7">
           <div class="text-center">
-            <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
-            <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+            <h1 class="block text-2xl font-bold text-gray-800 ">Sign in</h1>
+            <p class="mt-2 text-sm text-gray-600 ">
               Don't have an account yet?
-              <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="/register">
+              <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium " href="/register">
                 Sign up here
               </a>
             </p>
           </div>
       
           <div class="mt-5">
-            <a href="{{ route('redirect') }}" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+            <a href="{{ route('redirect') }}" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none ">
               <svg class="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                 <path d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z" fill="#4285F4"/>
                 <path d="M23.4694 47C29.8061 47 35.1161 44.9144 39.0179 41.3012L31.625 35.5437C29.6301 36.9244 26.9898 37.8937 23.4987 37.8937C17.2793 37.8937 12.0281 33.7812 10.1505 28.1412L9.88649 28.1706L2.61097 33.7812L2.52296 34.0456C6.36608 41.7125 14.287 47 23.4694 47Z" fill="#34A853"/>
@@ -35,7 +35,7 @@
               Sign in with Google
             </a>
       
-            <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">Or</div>
+            <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 ">Or</div>
       
             <!-- Form -->
             <form method="POST" action="{{ route('login') }}">
@@ -44,9 +44,9 @@
 
                 <!-- Email Input -->
                 <div>
-                    <label for="email" class="block text-sm mb-2 dark:text-white">Email address</label>
+                    <label for="email" class="block text-sm mb-2 ">Email address</label>
                     <div class="relative">
-                        <input type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ old('email') }}" required>
+                        <input type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" value="{{ old('email') }}" required>
                     </div>
                     <!-- Error email -->
                     <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-600" />
@@ -56,11 +56,11 @@
                  <!-- Password Input -->
                 <div>
                     <div class="flex justify-between items-center">
-                        <label for="password" class="block text-sm mb-2 dark:text-white">Password</label>
-                    <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="/forgot-password">Forgot password?</a>
+                        <label for="password" class="block text-sm mb-2 ">Password</label>
+                    <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium " href="/forgot-password">Forgot password?</a>
                     </div>
                     <div class="relative">
-                        <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
+                        <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " required>
                     </div>
                     <!-- Error password -->
                     <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-600" />
@@ -68,18 +68,10 @@
                 <!-- End Password Input -->
       
                 <!-- Checkbox -->
-                {{-- <div class="flex items-center">
-                  <div class="flex">
-                    <input id="remember_me" name="remember_me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" name="remember">
-                  </div>
-                  <div class="ms-3">
-                    <label for="remember_me" class="text-sm dark:text-white">Remember me</label>
-                  </div>
-                </div> --}}
                 <label for="remember_me" class="inline-flex items-center">
-                  <input id="remember_me" type="checkbox"  name="remember" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  <input id="remember_me" type="checkbox"  name="remember" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500">
                   <div class="ms-3">
-                    <label for="remember_me" class="text-sm dark:text-white">Remember me</label>
+                    <label for="remember_me" class="text-sm ">Remember me</label>
                   </div>
                 </label>
                 <!-- End Checkbox -->
