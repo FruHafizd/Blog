@@ -43,7 +43,7 @@
                             <span class="text-sm text-gray-500">{{ $posts->created_at->format('M d, Y') }}</span>
                         </div>
                         <h2 class="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-200">{{ $posts->title }}</h2>
-                        <p class="text-gray-600 mb-4">{{ Str::limit($posts->content, 100) }}</p>
+                        <p class="text-gray-600 mb-4">{{ Str::limit($posts->short_description, 100) }}</p>
                         <span class="text-blue-600 font-medium hover:underline">Read more &rarr;</span>
                     </div>
                 </a>
